@@ -5,8 +5,8 @@ bills. The introduction can be found <a href="$URL(help/bill)">here</a>
 
 <h3>Individual prices</h3>
 
-If you prefer to list the individual shares that people consume, instead of
-the total, you can prefix the the price with an asterisk.<br/>
+If you prefer to list the price of individual shares that people consume, instead of
+their total, you can prefix the the amount with an asterisk.<br/>
 If you paid a $UNIT2.2 icecream for Woody and Buzz Lightyear, and two for Mr. Potato Head,
 you could write:
 <div class='code'>

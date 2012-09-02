@@ -4,7 +4,7 @@
 specified using a text-based description of a bill. <br/>
 In what follows, its features will be introduced step-by-step.</p>
 
-<h3>The basics</h3>
+<h3>Items</h3>
 
 To start with a very simple example, imagine you paid a $UNIT1.0 bread for &quot;Mickey Mouse&quot; (a friend of yours).
 In that case you could write:
@@ -18,7 +18,9 @@ In case you shared the bread with Mickey, and each ate half of it, you can write
 <div class='code'>
 1.0 bread: Mickey Mouse, $FULLNAME
 </div>
-<br/>
+
+<h3>Shorthands</h3>
+
 Now if he also drank a $UNIT1.5 bottle of water (and you paid for it), it becomes somewhat tedious to
 keep writing all names in full:
 <div class='code'>
@@ -33,9 +35,11 @@ m = Mickey Mouse<br/>
 1.0 bread: i, m<br/>
 1.5 water: m
 </div>
-<br/>
+
+<h3>Contributions</h3>
+
 If it happens that someone involved in the transaction contributes some money, you can simply
-write an at-symbol (@) followed by that amount after the name of this person. The difference in money between all items
+write an at-symbol (@) followed by the amount after the name of this person. The difference in money between all items
 and all contributions is assumed to come from yourself.<br/>
 So, if it happened that Mickey did pay $UNIT1.0, you could write:
 <div class='code'>
@@ -45,7 +49,9 @@ m = Mickey Mouse @1.0<br/>
 1.0 bread: i, m<br/>
 1.5 water: m
 </div>
-<br/>
+
+<h3>Multipliers</h3>
+
 If some people consumed more than others, you could just list them more than once after the item,
 but you can also write a number in front (called a multiplier). So if you ate 2/3 of the bread, and Mickey only 1/3,
 you could write:
@@ -56,11 +62,12 @@ m = Mickey Mouse @1.0<br/>
 1.0 bread: 2 i, m<br/>
 1.5 water: m
 </div>
+Warning: multipliers can only be whole numbers.
 
 <h3>Automatic completion of names</h3>
 
-In fact, it is not necessary to type the names of all people involved in the transaction.
-You can abbreviate all names or change their capitalization, as long as they remain unambiguous. If Mickey is the only
+In fact, it is not necessary to type the names of all people involved in the transaction fully.
+You can abbreviate all names or change their capitalization, as long as it remains unambiguous. If Mickey is the only
 one you know whose name starts with 'Mi', you can just type:
 <div class='code'>
 i = $FULLNAME<br/>
@@ -68,7 +75,7 @@ m = mi @1.0<br/>
 ...
 </div>
 However, if you know Minnie Mouse as well, you would at least need to use &quot;mic&quot;
-to refer to Mickey. If you use an ambiguous abbreviation (of simply a wrong one), the interface
+to refer to Mickey. If you use an ambiguous abbreviation (or simply a wrong one), the interface
 will warn you, and return to the same screen to let you fix it. Otherwise, the names will be expanded to their
 full form when saving.<br/>
 In what follows, we will refer to Mickey as &quot;mick&quot;.

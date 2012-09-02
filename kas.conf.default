@@ -1,0 +1,26 @@
+# database server hostname
+dbhost localhost
+
+# username for database
+dbuser kas
+
+# database name
+dbname kas
+
+# database password
+dbpass p4ssw0rd
+
+# prefix to use in database (optional)
+dbprefix kas
+
+# title to use 
+title DemoKas
+
+# title to use in html
+htmltitle Demo<sub>Kas</sub>
+
+# mails will be sent from
+mailfrom email@addre.ss
+
+# allow resetting of database (using 'reset') - comment out as soon as database created
+initdb true

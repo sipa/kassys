@@ -1,0 +1,15 @@
+Kassys Bill Description Language
+
+1. Formal grammar
+
+space := [ ]+
+int := [-]? [0-9]+
+num := int ([.] [0-9]+)?
+symb := [a-zA-Z][a-zA-Z0-9]*
+name := [^,#]
+
+line := space? ([@] space? symb space?)? ([*]? num space?)? ([^:]* space? [:] space?)? (symb space? [=] space?)? ldef space? ([#] .*)
+ldef :=   (int space)? name (num space)? ([,] space? ldef)?
+        | (int space)? [$]int (num space)? ([,] space? ldef)?
+        | int? space? symb [,] space? ldef?
+

@@ -1,0 +1,61 @@
+RevueKas v0.2 by sipa
+=====================
+
+1. Doel
+-------
+
+Ik heb dit programmaatje in eertse plaats geschreven om te helpen van het
+beheren van de kotkas. Belangrijkste punten waren:
+- zo nauw mogelijk aansluiten met hoe nu de kotkas beheerd werd
+- iedereen individueel duidelijkheid geven in welke schulden/tegoeden hij heeft
+- gebruiksvriendelijk zijn (lees: zo weinig mogelijk klikken/typen voor veel
+  voorkomende dingen)
+
+2. Het programma
+----------------
+
+Er zijn enkele begrippen:
+- gebruikers: dit zijn personen of fictieve rekeningen, zoals de kas zelf
+- groepen: een verzameling personen (eventueel 0), elk met een bepaald
+           gewicht (in de meeste gevallen is dat gewoon 1)
+- betalingen: is geld dat overgedragen is van 1 gebruiker naar een andere
+              (om schuld af te lossen of om geld aan die begruiker te lenen)
+- items: geld dat een persoon eist van een groep
+- niet-toegewezen items: geld dat geeist wordt van een groep die niet
+                         volledig bepaald is (later meer)
+
+Iedere gebruiker heeft normaal gezien een account, waardoor die als zichzelf
+kan inloggen in het programma.
+
+Iedereen ziet iedereen's totaal, en de waarde van alle niet-toegewezen items.
+(niet-toegewezen items kan men als "voorraad" interpreteren).
+Negatieve waardes duiden op "een netto schuld aan de rest", terwijl
+positieve waardes duiden op "een netto tegoed van de rest".
+De som van alle totalen zou gelijk moeten zijn aan de waarde van de voorraad.
+
+Verder ziet iedereen dan nog een lijstje van alle items/betalingen die op
+hem/haar betrekking hebben.
+
+2.1 Betalingen
+--------------
+
+De eenvoudigste bewerking. Je kan als gebruiker ermee aangeven dat een andere
+gebruiker jou geld gegeven heeft (en niet omgekeerd). Degene die de betaling
+ingevoerd heeft (degene die het geld kreeg dus), is in staat om het bedrag
+te veranderen achteraf (ter correctie), of om de betaling geheel te
+verwijderen.
+Een betaling heeft een netto verlaging van je eigen totaal als gevolg, en
+een netto verhoging van het totaal van degene die betaalde.
+
+2.2 Items
+---------
+
+Items zijn ingewikkeldere bewerkingen, waarbij degene die ze invoert geld
+eist van een verzameling andere mensen (gedefinieerd door een groep).
+Een groep kan een maximaal aantal toewijzingen hebben (bv een bierbak-groep zal
+er zo 24 hebben). Zolang er minder effectieve toewijzingen zijn in die groep
+(in het geval van een bierbak, dat nog niet alle flesjes opgedronken zijn,
+of beter gezegd als de bierlijst nog niet ingetypt is als groep voor die bak)
+dan het maximaal aantal toewijzingen, wordt het niet-toegewezen deel bij het
+totaal van niet-toegewezen items gerekend.
+

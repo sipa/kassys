@@ -1753,7 +1753,7 @@ sub show_totals {
   }
   print "<div style=\"padding-right: 2em; float:left;\">\n";
   print "<h3>Hall of shame:</h3>";
-  print "<table>";
+  print "<table id='hos'>";
   print "<tr class='tblhead'><th>Name</th><th>Total</th></tr>\n";
   for (sort {$a->{ORD} <=> $b->{ORD}} (grep { defined($_->{ORD}) && $_->{ORD}<0 } (values %USERS))) {
     if ($_->{UID}==$auth_uid || ((defined $_->{VIS}) && $_->{ACTIVE})) {
@@ -1776,7 +1776,7 @@ sub show_totals {
   print "</div>\n";
   print "<div style=\"float:left;\">\n";
   print "<h3>Hall of fame:</h3>";
-  print "<table>";
+  print "<table id='hof'>";
   print "<tr class='tblhead'><th>Name</th><th>Total</th></tr>\n";
   for (sort {$b->{ORD} <=> $a->{ORD}} (grep { defined($_->{ORD}) && $_->{ORD}>=0 } (values %USERS))) {
     if ($_->{UID}==$auth_uid || ((defined $_->{VIS}) && $_->{ACTIVE})) {

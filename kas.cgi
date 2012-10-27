@@ -965,6 +965,7 @@ sub calculate_effects {
   return 1;
 }
 
+# use -2 for invalid, as -1 is already used for admin user
 sub lookup_user {
   need_user_list;
   my ($prefix) = @_;
@@ -977,7 +978,7 @@ sub lookup_user {
       if (!defined $uid || $FUSERS{$name}==$uid) {
         $uid=$FUSERS{$name};
       } else {
-        return -1;
+        return -2;
       }
     }
   }
@@ -1129,10 +1130,10 @@ sub process_bill {
           } else {
             $uid=lookup_user($pldef);
             if ($mode==3) {
-              if (defined $uid && $uid!=-1) {
+              if (defined $uid && $uid!=-2) {
                 $pldef = '$'.$uid;
               }
-              if ($uid==-1) {
+              if ($uid==-2) {
                 push @msg,['warn',"Ambiguous user specification in bill: ".htmlwrap("'".$pldef."'") . (defined $item ? " (in definition of item ".htmlwrap("'".$item."'").")" : "")];
                 $err=1;
               }

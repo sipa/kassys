@@ -1112,7 +1112,7 @@ sub process_bill {
             $contrib = $3;
             $pldef = $1;
           }
-          if ($pldef =~ /\A\$([0-9]+)/) {
+          if ($pldef =~ /\A\$(-?[0-9]+)/) {
             $uid=$1;
             if ($mode==1) { # just expand uid into name
               need_user_list($uid);

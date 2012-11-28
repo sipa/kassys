@@ -1,0 +1,36 @@
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-right {
+    text-align: right !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.dropdown-dark {
+    background-color: #1b1b1b;
+}
+
+.dropdown-dark  li > a {
+    color: #999999;
+}
+
+body {
+    padding-top: 60px;
+    padding-bottom: 30px;
+}
+
+.sidebar-nav {
+    padding: 9px 0;
+}
+
+.table-condensed .progress {
+    margin-bottom: 0px !important;
+}
+
+.form-horizontal-condensed .control-group {
+    margin-bottom: 0px !important;
+}

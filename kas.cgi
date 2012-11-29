@@ -1590,7 +1590,7 @@ sub days_to_neutral {
 sub output_header {
   my @cookies=();
   if (defined $session) {
-    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{HTTP_HOST}, -path => $DIR, -expires => "+${SESSION_TIME}m");
+    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{SERVER_NAME}, -path => $DIR, -expires => "+${SESSION_TIME}m");
     #log_action "COOKIE: ".(join('|',%cookiedata));
     push @cookies,cookie(%cookiedata);
   }
@@ -1645,7 +1645,7 @@ sub output_header {
   print "<div class='span10'>\n";
   print "<div class='container-fluid'>\n";
   for my $msg (@msg) {
-    print "<div class='msg$msg->[0]'>$msg->[1]</div>\n";
+    print "<div class='alert alert-$msg->[0]'>$msg->[1]</div>\n";
   }
 }
 
@@ -2486,37 +2486,89 @@ while(1) {
       }
     }
     output_header;
-    print "<h3>Log in:</h3>";
-    print "<form name='input' action='".selfurl."' method='post'>";
-    print "<table>";
-    print "<tr class='tblodd'><td>Username:</td><td> <input type='text' name='username' value='".htmlwrap(param('username') || '')."'></td></tr>";
-    print "<tr class='tbleven'><td>Password:</td><td> <input type='password' name='password'></td></tr>";
-    print "</table>\n";
-    print "<input type='submit' value='Log in'>";
+    print "<div class='page-header'>\n";
+    print "<h1>Log in</h1>\n";
+    print "</div>\n";
+    print "<form class='form-horizontal' name='input' action='".selfurl."' method='post'>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label' for='username'>Username</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='text' id='username' placeholder='Username' name='username' value='".htmlwrap(param('username') || '')."'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label' for='inputPassword'>Password</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='password' name='password' id='inputPassword' placeholder='Password'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<div class='controls'>\n";
+    print "<input type='submit' value='Log in' class='btn btn-primary'>\n";
+    print "</div>\n";
+    print "</div>\n";
     print "</form>\n";
-    print "<h3>Create new account:</h3>\n";
-    print "<form name='input' action='".selfurl."' method='post'>";
+    print "<div class='page-header'>\n";
+    print "<h1>Create new account</h1>\n";
+    print "</div>\n";
+    print "<form class='form-horizontal' name='input' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='cmd' value='dona' />\n";
-    print "<table>";
-    print "<tr class='tblodd'><td>Full name:</td><td> <input type='text' name='fullname' /></td><td></td></tr>\n";
-    print "<tr class='tbleven'><td>E-mail address:</td><td> <input type='text' name='email' /></td><td>(must be unique)</td></tr>\n";
-    print "<tr class='tblodd'><td>Bank account number:</td><td> <input type='text' name='accnr' /> </td><td>(optional)</td></tr>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label' for='newFullname' name='fullname' >Full Name</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='text' id='newFullname' placeholder='John Doe'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label' for='newEmail'>E-mail address</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='email' id='newEmail' name='email' placeholder='john.doe&#064;something.net'>\n";
+    print "<span class='help-block'>Must be unique</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label' for='newIBAN'>Bank account number</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='text' id='newIBAN' name='accnr' placeholder='BE12 3456 7890 1234'>\n";
+    print "<span class='help-block'>Optional</span>\n";
+    print "</div>\n";
+    print "</div>\n";
     if (!$alreadyht && defined $ENV{REMOTE_USER}) {
-      print "<input type='hidden' name='dona_type' value='ht' />\n";
-      print "<tr class='tbleven'><td>Username:</td><td> $ENV{REMOTE_USER}</td><td></td></tr>\n";
-#      print "<li>Login method: <br/><ul>\n";
-#      print "<li><input type='radio' name='dona_type' value='ht' checked='checked'/> Automatic login: $ENV{REMOTE_USER} </li>\n";
-#      print "<li><input type='radio' name='dona_type' value='pw' /> Username/password: <ul><li>Username: <input type='text' name='username' value='".htmlwrap(param('username') || $ENV{REMOTE_USER} || '')."'/></li>\n<li>Password: <input type='password' name='password' /></li>\n<li>Repeat password: <input type='password' name='password2' /></li></li></ul>\n";
-#      print "</ul></li>\n";
+        print "<div class='control-group'>\n";
+        print "<span class='control-label'>Username</span>\n";
+        print "<div class='controls'>\n";
+        print " <span class='uneditable-input'>$ENV{REMOTE_USER}</span>\n";
+        print "</div>";
+        print "</div>";
     } else {
-      print "<input type='hidden' name='dona_type' value='pw' />\n";
-      print "<tr class='tbleven'><td>Username:</td><td> <input type='text' name='uname' value='".htmlwrap(param('username') || '')."'/></td><td>(must be unique)</td></tr>\n";
-      print "<tr class='tblodd'><td>Password:</td><td> <input type='password' name='password' /></td><td>(6 characters minimum)</td></tr>\n";
-      print "<tr class='tbleven'><td>Repeat password:</td><td> <input type='password' name='password2' /></td><td></td></tr>\n";
+        print "<input type='hidden' name='dona_type' value='pw' />\n";
+        print "<div class='control-group'>\n";
+        print "<label class='control-label' for='newUsername'>Username</label>\n";
+        print "<div class='controls'>\n";
+        print "<input type='text' id='newUsername' name='uname' value='".htmlwrap(param('username') || '')."' placeholder='jdoe'>\n";
+        print "<span class='help-block'>Must be unique</span>\n";
+        print "</div>\n";
+        print "</div>\n";
+        print "<div class='control-group'>\n";
+        print "<label class='control-label' for='newPassword'>Password</label>\n";
+        print "<div class='controls'>\n";
+        print "<input type='password' id='newPassword' name='password' placeholder='Password'>\n";
+        print "<span class='help-block'>6 characters minimum</span>\n";
+        print "</div>\n";
+        print "</div>\n";
+        print "<div class='control-group'>\n";
+        print "<label class='control-label' for='newRepeatPassword'>Repeat Password</label>\n";
+        print "<div class='controls'>\n";
+        print "<input type='password' id='newRepeatPassword' name='password2' placeholder='Password'>\n";
+        print "</div>\n";
+        print "</div>\n";
     }
-    print "</table>\n";
     print "<input type='hidden' name='cmd' value='dona' />\n";
-    print "<input type='submit' value='Request account' />\n";
+    print "<div class='control-group'>\n";
+    print "<div class='controls'>\n";
+    print "<input type='submit' value='Request account' class='btn' />\n";
+    print "</div>\n";
+    print "</div>\n";
     print "</form>\n";
     output_footer;
   } elsif ($menu eq 'empty') {

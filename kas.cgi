@@ -2376,8 +2376,10 @@ while(1) {
   } elsif ($menu eq 'connections' && defined $auth_username) {
     need_user_list(1);
     output_header;
-    print "<h3>Edit visible people</h3>\n";
-    print "<form action='$URL' method='post'>\n";
+    print "<div class='page-header'>\n";
+    print "<h1>Edit visible people</h1>\n";
+    print "</div>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' action='$URL' method='post'>\n";
     print "<input type='hidden' name='cmd' value='doev'>\n";
     my %au;
     for (sort {
@@ -2386,12 +2388,22 @@ while(1) {
       return lc($a->{NAME}) cmp lc($b->{NAME});
     } (values %USERS)) {
       if ($_->{UID}!=$auth_uid && $_->{ACTIVE}) {
-        print "<input type='checkbox' name='ev_u$_->{UID}' value='1' ".(defined($_->{VIS}) ? "checked='checked'" : "")."/> ".$_->{NAME}."<br>\n";
+        print "<div class='control-group'>\n";
+        print "<label class='control-label'>".$_->{NAME}."</label> \n";
+        print "<div class='controls'>\n";
+        print "<input type='checkbox' name='ev_u$_->{UID}' value='1' ".(defined($_->{VIS}) ? "checked='checked'" : "").">\n";
+        print "</div>\n";
+        print "</div>\n";
         $au{$_->{UID}}=1;
       }
     }
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<p/><input type='submit' value='Submit'>\n";
+    print "<div class='control-group'>\n";
+    print "<div class='control-label'>\n";
+    print "<input type='submit' value='Submit' class='btn btn-primary'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "</form>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

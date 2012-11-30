@@ -2403,6 +2403,7 @@ while(1) {
     }
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
     print "<p/><input type='submit' value='Submit'>\n";
+    print "</form>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

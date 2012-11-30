@@ -2526,9 +2526,9 @@ while(1) {
     print "<form class='form-horizontal' name='input' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='cmd' value='dona' />\n";
     print "<div class='control-group'>\n";
-    print "<label class='control-label' for='newFullname' name='fullname' >Full Name</label>\n";
+    print "<label class='control-label' for='newFullname'  >Full Name</label>\n";
     print "<div class='controls'>\n";
-    print "<input type='text' id='newFullname' placeholder='John Doe'>\n";
+    print "<input type='text' id='newFullname' name='fullname' placeholder='John Doe'>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";

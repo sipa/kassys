@@ -1335,8 +1335,7 @@ sub show_totals {
         if (defined($auth_uid) && ($_->{UID} == $auth_uid)) {
           ($hi1,$hi2)=("<b>","</b>");
         }
-        my $ab="";
-        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>$ab</tr> \n";
+        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td></tr> \n";
       } else {
         print "<!-- ".htmlwrap($_->{NAME}).": total=".sprintf("$UNIT%.2f",$_->{TOTAL})." int=".sprintf("%.4f",$_->{EXTRA})."$accnr -->\n";
       }
@@ -1358,8 +1357,7 @@ sub show_totals {
         if (defined($_->{UID}) && $_->{UID} == $auth_uid) {
           ($hi1,$hi2)=("<b>","</b>");
         }
-        my $ab="";
-        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>$ab</td></tr> \n";
+        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td></td></tr> \n";
       } else {
         print "<!-- ".htmlwrap($_->{NAME}).": total=";
         print sprintf("$UNIT%.2f",$_->{TOTAL});

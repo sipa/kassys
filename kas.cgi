@@ -299,7 +299,7 @@ sub connect_db {
   my $host=$CONF{dbhost} || "localhost";
   my $dbusername=$CONF{dbuser};
   my $dbpassword=$CONF{dbpass};
-  $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$host", $dbusername, $dbpassword,{AutoCommit => 1,RaiseError => 0});
+  $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$host", $dbusername, $dbpassword,{AutoCommit => 1,RaiseError => 0}) or die "Unable to connect: $DBI::errstr\n";
   $prefix=defined($CONF{dbprefix}) ? "$CONF{dbprefix}_" : "";
   $title=$CONF{title} || $VERSION;
   $htmltitle=$CONF{htmltitle} || $title;
@@ -1302,7 +1302,9 @@ sub show_totals {
   my $sum=0;
   my $imneg=0;
   need_user_list;
-  print "<span style=\"font-size:small;\">The colors are an indication of your account history: red means mostly negative, green mostly positive</span>\n";
+
+  print "<div class='row-fluid'>\n";
+  print "<p>The colors are an indication of your account history: red means mostly negative, green mostly positive</p>\n";
   # By ruben: proberen om te laten zien hoe lang je nog op huidig bedrag moet staan om op neutraal te komen
   for (values %USERS) {
     if ($_->{UID} == $auth_uid) {
@@ -1313,20 +1315,31 @@ sub show_totals {
         if ($t+$e!=0 && ($t/($t+$e))>0) {
           my $days=days_to_neutral($t,$e);
           if ($days >= 2) {
-            print "<p>Within ".sprintf("%.0f", $days)." days your ".($e<0 ? "red" : "green")." color will become white, if no transactions occur</p>\n";
+            print "<p class='lead'>Within ".sprintf("%.0f", $days)." days your ".($e<0 ? "red" : "green")." color will become white, if no transactions occur</p>\n";
             print "<!-- TOTAL: $_->{TOTAL} ; EXTRA: $_->{EXTRA} -->";
           } if ($days <= -2) {
-            print "<!-- You are ".sprintf("%.0f", -$days)." days beyond neutral. ".($t+$e>0 ? "Accept some money from others!" : "Give some money to others!")." --->\n";
+            print "<!-- <p class='lead'>You are ".sprintf("%.0f", -$days)." days beyond neutral. ".($t+$e>0 ? "Accept some money from others!" : "Give some money to others!")." </p> --->\n";
             print "<!-- TOTAL: $_->{TOTAL} ; EXTRA: $_->{EXTRA} -->";
           }
         }
       }
     }
   }
-  print "<p><div style=\"padding-right: 2em; float:left;\">\n";
-  print "<h3>Hall of shame:</h3>";
-  print "<table>";
-  print "<tr class='tblhead'><th>Name</th><th>Total</th></tr>\n";
+  print "</div>\n";
+  print "<div class='row-fluid'>\n";
+  print "<div class='span4'>\n";
+  print "<div class='page-header'>\n";
+  print "<h1>Hall of shame</h1>\n";
+  print "</div>\n";
+  print "<table class='table table-striped table-condensed'>\n";
+  print "<thead>\n";
+  print "<tr>\n";
+  print "<th width='80%'>Name</th>\n";
+  print "<th class='text-align-right' width='20%'>Total</th>\n";
+  print "</tr>\n";
+  print "</thead>\n";
+  print "<tbody>\n";
+
   for (sort {$a->{ORD} <=> $b->{ORD}} (grep { defined($_->{ORD}) && $_->{ORD}<0 } (values %USERS))) {
     if ($_->{UID}==$auth_uid || ((defined $_->{VIS}) && $_->{ACTIVE})) {
       my $accnr = (defined $_->{ACCNR}) ? " accnr=$_->{ACCNR}" : "";
@@ -1335,8 +1348,10 @@ sub show_totals {
         if (defined($auth_uid) && ($_->{UID} == $auth_uid)) {
           ($hi1,$hi2)=("<b>","</b>");
         }
-        my $ab="";
-        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>$ab</tr> \n";
+        print "<tr>\n";
+        print "<td>$hi1".htmlwrap($_->{NAME})."$hi2</td>\n";
+        print "<td class='text-align-right' style=\"background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>\n";
+        print "</tr>\n";
       } else {
         print "<!-- ".htmlwrap($_->{NAME}).": total=".sprintf("$UNIT%.2f",$_->{TOTAL})." int=".sprintf("%.4f",$_->{EXTRA})."$accnr -->\n";
       }
@@ -1344,12 +1359,24 @@ sub show_totals {
     $sum += $_->{TOTAL};
   }
   my $shame=$sum;
+
+  print "</tbody>\n";
   print "</table>\n";
   print "</div>\n";
-  print "<div style=\"float:left;\">\n";
-  print "<h3>Hall of fame:</h3>";
-  print "<table>";
-  print "<tr class='tblhead'><th>Name</th><th>Total</th></tr>\n";
+  print "<!--/span-->\n";
+  print "<div class='span4'>\n";
+  print "<div class='page-header'>\n";
+  print "<h1>Hall of fame</h1>\n";
+  print "</div>\n";
+  print "<table class='table table-striped table-condensed'>\n";
+  print "<thead>\n";
+  print "<tr>\n";
+  print "<th width='80%'>Name</th>\n";
+  print "<th class='text-align-right' width='20%'>Total</th>\n";
+  print "</tr>\n";
+  print "</thead>\n";
+  print "<tbody>\n";
+
   for (sort {$b->{ORD} <=> $a->{ORD}} (grep { defined($_->{ORD}) && $_->{ORD}>=0 } (values %USERS))) {
     if ($_->{UID}==$auth_uid || ((defined $_->{VIS}) && $_->{ACTIVE})) {
       my $accnr = (defined $_->{ACCNR}) ? " accnr=$_->{ACCNR}" : "";
@@ -1358,8 +1385,10 @@ sub show_totals {
         if (defined($_->{UID}) && $_->{UID} == $auth_uid) {
           ($hi1,$hi2)=("<b>","</b>");
         }
-        my $ab="";
-        print "<tr class='tblunif'><td>$hi1".htmlwrap($_->{NAME})."$hi2</td><td style=\"text-align:right; background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>$ab</td></tr> \n";
+        print "<tr>\n";
+        print "<td>$hi1".htmlwrap($_->{NAME})."$hi2</td>\n";
+        print "<td class='text-align-right' style=\"background-color:".get_color($_->{EXTRA},226,226,226).";\">$hi1".( sprintf("$UNIT%.2f",$_->{TOTAL}))."<!-- + ".sprintf("%.4f",$_->{EXTRA})."; ".sprintf("%.0f",days_to_neutral($_->{TOTAL},$_->{EXTRA}))." days$accnr -->$hi2</td>\n";
+        print "</tr>\n";
       } else {
         print "<!-- ".htmlwrap($_->{NAME}).": total=";
         print sprintf("$UNIT%.2f",$_->{TOTAL});
@@ -1370,11 +1399,13 @@ sub show_totals {
     $sum += $_->{TOTAL};
   }
   #print "<tr><td><em>Unassigned</em></td><td>".sprintf("$UNIT%.2f",$sum)."</td></tr>\n" if ($sum>=0.005);
+  print "</tbody>\n";
   print "</table>\n";
   print "</div>\n";
-  print "<div style=\"clear:both; margin-bottom: 2ex;\"><br></div><p>\n";
-  print "<p><b>Total imbalance: ".sprintf("$UNIT%.2f",-$shame)."</b></p>\n";
-  print "<p style=\"margin-top: 2ex;\">";
+  print "</div>\n";
+  print "<div class='row-fluid'>\n";
+  print "<h3>Total imbalance: ".sprintf("$UNIT%.2f",-$shame)."</h3>\n";
+  print "</div>\n";
 }
 
 sub show_unassigned {
@@ -1479,12 +1510,13 @@ sub describe {
 sub show_history_line {
   my ($amount,$seen,$accept,$name,$author,$affectuid,$affectgid,$wwhen,$type,$tid,$active,$num,$showch) = @_;
   my $st=($active ? "" : "text-decoration: line-through; ");
-  print "<tr class='".($num%2 ? "tbleven" : "tblodd")."' ><td style='$st'>";
-  print (substr($wwhen,0,16) || "never");
-  print "</td><td style='$st'>";
+  print "<tr>\n";
+  print "<td style='$st'>".(substr($wwhen,0,16) || "never")."</td>\n";
+  print "<td style='$st'>";
   my $descr=describe($amount,$name,$author,$affectuid,$affectgid,$type,$tid);
   print $descr;
-  print "</td><td style='text-align:right; color:".($amount>=0 ? 'black' : 'red')."; $st'>";
+  print "</td>\n";
+  print "<td class='text-align-right' style='color:".($amount>=0 ? 'black' : 'red')."; $st'>";
   print "<a title=\"".htmlwrap($amount)."\">".sprintf("$UNIT%.2f",abs($amount))."</a>\n";
   print "</td>";
   my $raccept=$accept;
@@ -1492,7 +1524,7 @@ sub show_history_line {
     $raccept=$amount+$auth_autoaccept>$seen;
   }
   my $changed=abs($amount-$seen)>=$THRESHOLD;
-  print "<td style='text-align: center; $st'>";
+  print "<td class='text-align-center' style='$st'>";
   print "<input type='checkbox' name='hlx_$tid' value='1' ".($raccept ? '' : 'checked')." />";
   print "<input type='hidden' name='hlv_$tid' value='".($showch ? $amount : $seen)."' />";
   print "<input type='hidden' name='hlo_$tid' value='".((!defined $accept || ($showch && $changed)) ? "-1" : ($raccept ? "0" : "1"))."' />";
@@ -1521,12 +1553,25 @@ sub show_warn {
   my $changes=0;
   my $num=0;
   my @ids=();
-  print "<h3>Notifications for ".htmlwrap($auth_fullname).":</h3>\n";
+  print "<div class='row-fluid'>\n";
+  print "<div class='span8'>\n";
+  print "<div class='page-header'>\n";
+  print "<h1>Notifications for ".htmlwrap($auth_fullname)."</h1>\n";
+  print "</div>\n";
   while (my ($amount,$seen,$accept,$name,$author,$affectuid,$affectgid,$wwhen,$type,$tid,$active) = $sth->fetchrow_array) {
     if (!$warned) {
       print "<form name='editwarn' action='".selfurl."' method='post'>\n";
-      print "<table>";
-      print "<tr class='tblhead'><th>Date</th><th>Reason</th><th>Amount</th><th>Denied</th><th>Changed</th></tr>\n";
+      print "<table class='table table-condensed table-striped'>\n";
+      print "<thead>\n";
+      print "<tr>\n";
+      print "<th>Date</th>\n";
+      print "<th>Reason</th>\n";
+      print "<th class='text-align-right'>Amount</th>\n";
+      print "<th class='text-align-center'>Denied</th>\n";
+      print "<th>Changed</th>\n";
+      print "</tr>\n";
+      print "</thead>\n";
+      print "<tbody>\n";
       $warned=1;
     }
     push @ids,show_history_line($amount,$seen,$accept,$name,$author,$affectuid,$affectgid,$wwhen,$type,$tid,$active,$num++,1);
@@ -1535,15 +1580,17 @@ sub show_warn {
     }
   }
   if ($warned) {
+    print "</tbody>\n";
     print "</table>\n";
     print "<input type='hidden' name='hl_ids' value='".join(',',@ids)."' />\n";
     print "<input type='hidden' name='cmd' value='dohl' />\n";
-    print "<input type='submit' value='Acknowledge' />\n";
+    print "<input type='submit' class='btn' value='Acknowledge'/>\n";
     print "</form>\n";
   } else {
     print "No notifications at this time.\n";
   }
-  print "<p/>\n";
+  print "</div>\n";
+  print "</div>\n";
   return 1;
 }
 
@@ -1551,14 +1598,28 @@ sub show_history {
   my ($all)=@_;
   my $sth;
   need_user_list;
+  print "<div class='row-fluid'>\n";
+  print "<div class='span8'>\n";
+  print "<div class='page-header'>\n";
   if (defined $all) {
-    print "<h3>Full history</h3>\n";
+    print "<h1>Full history</h1>\n";
   } else {
-    print "<h3>Recent history</h3>\n";
+    print "<h1>Recent history</h1>\n";
   }
+  print "</div>\n";
+
   print "<form name='edithistory' action='".selfurl."' method='post'>\n";
-  print "<table>";
-  print "<tr class='tblhead'><th>Date</th><th>Reason</th><th>Amount</th><th>Denied</th></tr>\n";
+
+  print "<table class='table table-striped table-condensed'>\n";
+  print "<thead>\n";
+  print "<tr>\n";
+  print "<th>Date</th>\n";
+  print "<th>Reason</th>\n";
+  print "<th class='text-align-right'>Amount</th>\n";
+  print "<th class='text-align-center'>Denied</th>\n";
+  print "</tr>\n";
+  print "</thead>\n";
+  print "<tbody>\n";
   $sth=$dbh->prepare("SELECT E.AMOUNT,E.SEEN,E.ACCEPT,T.NAME,T.AUTHOR,T.AFU,T.AFG,T.WWHEN,T.TYP,T.TID,T.ACTIVE FROM ${prefix}EF E, ${prefix}TR T WHERE E.UID=? AND T.TID=E.TID ORDER BY T.WWHEN DESC".($all ? "" : " LIMIT 50"));
   $sth->execute($auth_uid);
   my @ids=();
@@ -1567,12 +1628,15 @@ sub show_history {
     push @ids,show_history_line($amount,$seen,$accept,$name,$author,$affectuid,$affectgid,$wwhen,$type,$tid,$active,$num++,0);
   }
   $sth->finish;
-  print "</table>";
+  print "</tbody>\n";
+  print "</table>\n";
   print "<input type='hidden' name='hl_ids' value='".join(',',@ids)."' />\n";
   print "<input type='hidden' name='cmd' value='dohl' />\n";
-  print "<input type='submit' value='Change denies' />\n";
+  print "<input type='submit' class='btn' value='Change denies' />\n";
   print "</form>\n";
-  print "<br>\n";
+  print "</div>\n";
+  print "</div>\n";
+
 }
 
 # calculate number of days to reach white
@@ -1748,9 +1812,9 @@ if ($command eq 'dona') {
       push @msg,['error',"Cannot add user, try again or inform administrator"];
     }
     if ($ok) {
-      $ok=open(PIPE,"|mail -s 'New account: $title' ".(defined($mailfrom) ? "-a 'From: $mailfrom'" : "")." '$email'");
-      if ($ok) { print PIPE "Hello $fullname,\n\na new $title account has been created for you.\nTo activate it, use this link:\n\n  ".url(-base=>1).genurl('activate',$rid)."\n\n-- \nKind regards,\n$title mailer\n"; }
-      $ok=(close PIPE) if ($ok);
+      # $ok=open(PIPE,"|mail -s 'New account: $title' ".(defined($mailfrom) ? "-a 'From: $mailfrom'" : "")." '$email'");
+      # if ($ok) { print PIPE "Hello $fullname,\n\na new $title account has been created for you.\nTo activate it, use this link:\n\n  ".url(-base=>1).genurl('activate',$rid)."\n\n-- \nKind regards,\n$title mailer\n"; }
+      # $ok=(close PIPE) if ($ok);
       push @msg,['info',"An activation code was mailed to ".htmlwrap($email).". It will remain valid for a week."] if ($ok);
       push @msg,['error',"Could not send e-mail. Try again or contact administrator."] if (!$ok);
     }
@@ -2379,7 +2443,7 @@ while(1) {
     print "<div class='page-header'>\n";
     print "<h1>Edit visible people</h1>\n";
     print "</div>\n";
-    print "<form class='form-horizontal form-horizontal-condensed' action='$URL' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
     print "<input type='hidden' name='cmd' value='doev'>\n";
     my %au;
     for (sort {
@@ -2459,13 +2523,8 @@ while(1) {
     }
     output_header;
     show_totals;
-    print "<hr/>\n";
-    if (show_unassigned) {
-      print "<hr/>\n";
-    }
-    if (show_warn) {
-      print "<hr/>\n";
-    }
+    show_unassigned;
+    show_warn;
     show_history;
     output_footer;
   } elsif ($menu eq 'history') {
@@ -2501,7 +2560,7 @@ while(1) {
     print "<div class='page-header'>\n";
     print "<h1>Log in</h1>\n";
     print "</div>\n";
-    print "<form class='form-horizontal' name='input' action='".selfurl."' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' name='input' action='".selfurl."' method='post'>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='username'>Username</label>\n";
     print "<div class='controls'>\n";
@@ -2523,7 +2582,7 @@ while(1) {
     print "<div class='page-header'>\n";
     print "<h1>Create new account</h1>\n";
     print "</div>\n";
-    print "<form class='form-horizontal' name='input' action='".selfurl."' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' name='input' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='cmd' value='dona' />\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='newFullname'  >Full Name</label>\n";

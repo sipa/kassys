@@ -44,7 +44,7 @@ my $DENOM=18018000;        # 18018000 = kgv(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
 my $PCT=1.03;              # (annual) interest ratio for annuity corrections
 my $SEC_PER_YEAR=31556952; # average number of seconds in gregorian year
 my $THRESHOLD=0.005;       # differences below this many monetary units are ignored
-my $SESSION_TIME=15;       # session lifetime, in minutes
+my $SESSION_TIME=30;       # session lifetime, in minutes
 my $UNIT="&#8364; ";       # monetary unit
 
 # boolean configuration parameters
@@ -1246,57 +1246,127 @@ sub xmlwrap {
 sub show_form_add_pay {
   return if (!$auth_active);
   need_user_list;
-  print "<h3>New payment:</h3>\n";
-  print "<form name='addpay' action='".selfurl."' method='post'>\n";
+  print "<div class='page-header'>\n";
+  print "<h1>New payment</h1>\n";
+  print "</div>\n";
+  print "<form class='form-horizontal form-horizontal-condensed' name='addpay' action='".selfurl."' method='post'>\n";
   print "<input type='hidden' name='cmd' value='addpay'>\n";
-  print "<table>\n";
-  print "<tr class='tblodd'><td>User</td><td></td><td> <select name='ap_user'>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputUser'>User</label>\n";
+  print "<div class='controls'>\n";
+  print "<select name='ap_user' id='inputUser'>\n";
   for (sort {lc($a->{NAME}) cmp lc($b->{NAME})} (values %USERS)) {
     print "  <option value='$_->{UID}'>".htmlwrap($_->{NAME})."</option>\n" if (defined($_->{VIS}) && $_->{ACTIVE} && $_->{UID}!=$auth_uid);
   }
-  print "</select></td></tr>\n";
-  print "<tr class='tbleven'><td>paid me</td><td> $UNIT</td><td><input type='text' name='ap_value' value='0.00'></td></tr>\n";
-  print "</table><br/>\n";
-  print "<input type='submit' value='Add payment'></form><p>\n";
+  print "</select>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputAmount'>paid me</label>\n";
+  print "<div class='controls'>\n";
+  print "<div class='input-prepend'>\n";
+  print "<span class='add-on'>$UNIT</span>\n";
+  print "<input type='number' id='inputAmount' placeholder='0.00' name='ap_value'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<div class='controls'>\n";
+  print "<input type='submit' class='btn' value='Add payment'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "</form>\n";
 }
 sub show_form_add_bill {
   return if (!$auth_active);
-  print "<h3>New bill:</h3>\n";
-  print "To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages <p/>\n";
-  print "<form name='addbill' action='".selfurl."' method='post'>\n";
+  print "<div class='page-header'>\n";
+  print "<h1>New bill <small> To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages</small></h1>\n";
+  print "</div>\n";
+  print "<form class='form-horizontal form-horizontal-condensed' name='addbill' action='".selfurl."' method='post'>\n";
   print "<input type='hidden' name='cmd' value='addbill'>\n";
-  print "<table>\n";
-  print "<tr class='tblodd'><td>I paid a bill</td><td><input type='text' name='ab_name'></td><td>(name)</td></tr>\n";
-  print "<tr class='tbleven'><td>with description:</td><td> <input type='text' name='ab_descr' value=''></td><td></td>\n";
-  print "</table><br/>\n";
-  print "<input type='submit' value='Add bill'><br>\n";
-  print "</form>";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='billName'>I paid bill</label>\n";
+  print "<div class='controls'>\n";
+  print "<input type='text' name='ab_name' id='billName' placeholder='name'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='billDescription'>with description</label>\n";
+  print "<div class='controls'>\n";
+  print "<input type='text' name='ab_descr' id='billDescription' placeholder='description'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<div class='controls'>\n";
+  print "<input type='submit' class='btn' value='Add bill'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "</form>\n";
 }
 sub show_form_add_item {
   return if (!$auth_active);
   need_user_list;
   need_group_list;
-  print "<h3>New item:</h3>\n";
-  print "<form name='addwant' action='".selfurl."' method='post'>\n";
+
+  print "<div class='page-header'>\n";
+  print "<h1>New item</h1>\n";
+  print "</div>\n";
+  print "<form class='form-horizontal form-horizontal-condensed' name='addwant' action='".selfurl."' method='post'>\n";
   print "<input type='hidden' name='cmd' value='addwant'>\n";
-  print "<table>\n";
-  print "<tr class='tblodd'><td>I paid </td><td>$UNIT</td><td><input type='text' name='aw_value' value='0.00'></td><td>(price)</td></tr>\n";
-  print "<tr class='tbleven'><td>on </td><td></td><td><input type='text' name='aw_name' value=''></td><td>(name of item)</td></tr>\n";
-  print "<tr class='tblodd'><td>with description:</td><td></td><td> <input type='text' name='aw_descr' value=''></td><td> </td>\n";
-  print "<tr class='tbleven'><td>for user:</td><td><input type='radio' name='aw_gtype' value='user' checked></td><td> <select name='aw_user'>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputItemPrice'>I paid</label>\n";
+  print "<div class='controls'>\n";
+  print "<div class='input-prepend'>\n";
+  print "<span class='add-on'>$UNIT</span>\n";
+  print "<input type='number' name='aw_value' id='inputItemPrice' placeholder='0.00'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputItemName'>on item</label>\n";
+  print "<div class='controls'>\n";
+  print "<input type='text' name='aw_name' id='inputItemName' placeholder='item'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputItemDescription'>with description</label>\n";
+  print "<div class='controls'>\n";
+  print "<input type='text' id='inputItemDescription' name='aw_descr' placeholder='description'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputUser'>for user <input type='radio' name='aw_gtype' value='user' checked></label>\n";
+  print "<div class='controls'>\n";
+  print "<select name='aw_user' id='inputItemForUser'>\n";
   for (sort {lc($a->{NAME}) cmp lc($b->{NAME})} (values %USERS)) {
-    print "  <option value='$_->{UID}'>".htmlwrap($_->{NAME})."</option>\n" if (defined($_->{VIS}) && $_->{ACTIVE} && $_->{UID}!=$auth_uid);
+    print "<option value='$_->{UID}'>".htmlwrap($_->{NAME})."</option>\n" if (defined($_->{VIS}) && $_->{ACTIVE} && $_->{UID}!=$auth_uid);
   }
-  print "</select></td><td></td></tr>\n";
-  print "<tr class='tblodd'><td>for new group:</td><td><input type='radio' name='aw_gtype' value='new'></td><td> <input type='text' name='aw_ng_name'></td><td></td></tr>\n";
-  print "<tr class='tbleven'><td>for existing group:</td><td><input type='radio' name='aw_gtype' value='old'></td><td> <select name='aw_group'>\n";
+  print "</select>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputItemGroup'>for new group <input type='radio' name='aw_gtype' value='new'></label>\n";
+  print "<div class='controls'>\n";
+  print "<input type='text' id='inputItemGroup' name='aw_ng_name' placeholder='group name'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<label class='control-label' for='inputItemForGroup'>for existing group <input type='radio' name='aw_gtype' value='old'></label>\n";
+  print "<div class='controls'>\n";
+  print "<select id='inputItemForGroup'>\n";
   for (sort {$GROUPS{$b}->{WWHEN} cmp $GROUPS{$a}->{WWHEN}} (keys %GROUPS)) {
-    if ($GROUPS{$_}->{PUBLIC}) { print "  <option value='$GROUPS{$_}->{GID}'>".htmlwrap($GROUPS{$_}->{DNAME})."</option>\n" };
+    if ($GROUPS{$_}->{PUBLIC}) { print "<option value='$GROUPS{$_}->{GID}'>".htmlwrap($GROUPS{$_}->{DNAME})."</option>\n" };
   }
-  print "</select></td><td></td></tr>";
-  print "</table><br/>\n";
-  print "<input type='submit' value='Add item'><br>\n";
-  print "</form>";
+  print "</select>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "<div class='control-group'>\n";
+  print "<div class='controls'>\n";
+  print "<input type='submit' class='btn' value='Add item'>\n";
+  print "</div>\n";
+  print "</div>\n";
+  print "</form>\n";
+
 }
 sub show_totals {
   my $sum=0;
@@ -1516,8 +1586,8 @@ sub show_history_line {
   my $descr=describe($amount,$name,$author,$affectuid,$affectgid,$type,$tid);
   print $descr;
   print "</td>\n";
-  print "<td class='text-align-right' style='color:".($amount>=0 ? 'black' : 'red')."; $st'>";
-  print "<a title=\"".htmlwrap($amount)."\">".sprintf("$UNIT%.2f",abs($amount))."</a>\n";
+  print "<td class='text-align-right'>";
+  print "<a style='color:".($amount>=0 ? 'black' : 'red')."; $st' title=\"".htmlwrap($amount)."\">".sprintf("$UNIT%.2f",abs($amount))."</a>\n";
   print "</td>";
   my $raccept=$accept;
   if (!defined($raccept) || $amount<$seen) {
@@ -2534,9 +2604,7 @@ while(1) {
   } elsif ($menu eq 'add') {
     output_header;
     show_form_add_pay;
-    print "<hr/>\n";
     show_form_add_item;
-    print "<hr/>\n";
     show_form_add_bill;
     output_footer;
   } elsif ($menu eq 'settings') {

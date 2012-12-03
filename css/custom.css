@@ -38,3 +38,11 @@ body {
 .form-horizontal-condensed .control-group {
     margin-bottom: 5px !important;
 }
+
+.table-condensed input[type="radio"],
+.table-condensed input[type="checkbox"],
+.form-horizontal input[type="radio"],
+.form-horizontal input[type="checkbox"]
+{
+    vertical-align: top !important;
+}

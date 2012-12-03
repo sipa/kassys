@@ -59,3 +59,4 @@ of beter gezegd als de bierlijst nog niet ingetypt is als groep voor die bak)
 dan het maximaal aantal toewijzingen, wordt het niet-toegewezen deel bij het
 totaal van niet-toegewezen items gerekend.
 
+TEST

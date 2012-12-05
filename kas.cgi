@@ -1421,6 +1421,7 @@ sub show_change_settings {
 }
 
 sub show_change_password {
+  return if (!defined $auth_username);
   print "<h3>Change password:</h3>\n";
   print "<form name='chpasswd' action='".selfurl."' method='post'>\n";
   print "<table>";

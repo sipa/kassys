@@ -1246,10 +1246,9 @@ sub xmlwrap {
 sub show_form_add_pay {
   return if (!$auth_active);
   need_user_list;
-  print "<div class='page-header'>\n";
-  print "<h1>New payment</h1>\n";
-  print "</div>\n";
   print "<form class='form-horizontal form-horizontal-condensed' name='addpay' action='".selfurl."' method='post'>\n";
+  print "<fieldset>\n";
+  print "<legend>New payment</legend>\n";
   print "<input type='hidden' name='cmd' value='addpay'>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='inputUser'>User</label>\n";
@@ -1275,14 +1274,14 @@ sub show_form_add_pay {
   print "<input type='submit' class='btn' value='Add payment'>\n";
   print "</div>\n";
   print "</div>\n";
+  print "</fieldset>\n";
   print "</form>\n";
 }
 sub show_form_add_bill {
   return if (!$auth_active);
-  print "<div class='page-header'>\n";
-  print "<h1>New bill <small> To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages</small></h1>\n";
-  print "</div>\n";
   print "<form class='form-horizontal form-horizontal-condensed' name='addbill' action='".selfurl."' method='post'>\n";
+  print "<fieldset>\n";
+  print "<legend>New bill <small> To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages</small></legend>\n";
   print "<input type='hidden' name='cmd' value='addbill'>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='billName'>I paid bill</label>\n";
@@ -1301,17 +1300,16 @@ sub show_form_add_bill {
   print "<input type='submit' class='btn' value='Add bill'>\n";
   print "</div>\n";
   print "</div>\n";
+  print "</fieldset>\n";
   print "</form>\n";
 }
 sub show_form_add_item {
   return if (!$auth_active);
   need_user_list;
   need_group_list;
-
-  print "<div class='page-header'>\n";
-  print "<h1>New item</h1>\n";
-  print "</div>\n";
   print "<form class='form-horizontal form-horizontal-condensed' name='addwant' action='".selfurl."' method='post'>\n";
+  print "<fieldset>\n";
+  print "<legend>New item</legend>\n";
   print "<input type='hidden' name='cmd' value='addwant'>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='inputItemPrice'>I paid</label>\n";
@@ -1365,6 +1363,7 @@ sub show_form_add_item {
   print "<input type='submit' class='btn' value='Add item'>\n";
   print "</div>\n";
   print "</div>\n";
+  print "</fieldset>\n";
   print "</form>\n";
 
 }
@@ -1399,7 +1398,7 @@ sub show_totals {
   print "<div class='row-fluid'>\n";
   print "<div class='span4'>\n";
   print "<div class='page-header'>\n";
-  print "<h1>Hall of shame</h1>\n";
+  print "<h3>Hall of shame</h3>\n";
   print "</div>\n";
   print "<table class='table table-striped table-condensed'>\n";
   print "<thead>\n";
@@ -1436,7 +1435,7 @@ sub show_totals {
   print "<!--/span-->\n";
   print "<div class='span4'>\n";
   print "<div class='page-header'>\n";
-  print "<h1>Hall of fame</h1>\n";
+  print "<h3>Hall of fame</h3>\n";
   print "</div>\n";
   print "<table class='table table-striped table-condensed'>\n";
   print "<thead>\n";
@@ -1506,10 +1505,9 @@ sub show_change_settings {
   my $sth=$dbh->prepare("SELECT U.UNAME, U.FULLNAME, U.ACCNR, U.EMAIL, U.TOTALSUM, U.CREATED, U.AUTOACCEPT FROM ${prefix}USERS U WHERE UID=?");
   $sth->execute($auth_uid);
   my ($uname,$fullname,$accnr,$email,$total,$created,$autoaccept)=$sth->fetchrow_array;
-  print "<div class='page-header'>\n";
-  print "<h1>Profile settings</h1>\n";
-  print "</div>\n";
   print "<form class='form-horizontal form-horizontal-condensed form-horizontal-wide' name='chprofile' action='".selfurl."' method='post'>\n";
+  print "<fieldset>\n";
+  print "<legend>Profile settings</legend>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label'>User name</label>\n";
   print "<div class='controls'>\n";
@@ -1561,14 +1559,14 @@ sub show_change_settings {
   print "<input type='submit' class='btn' value='Change settings'>\n";
   print "</div>\n";
   print "</div>\n";
+  print "</fieldset>\n";
   print "</form>\n";
 }
 
 sub show_change_password {
-  print "<div class='page-header'>\n";
-  print "<h1>Change Password</h1>\n";
-  print "</div>\n";
   print "<form class='form-horizontal form-horizontal-condensed form-horizontal-wide' name='chpasswd' action='".selfurl."' method='post'>\n";
+  print "<fieldset>\n";
+  print "<legend>Change Password</legend>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='old_pw'>Old password</label>\n";
   print "<div class='controls'>\n";
@@ -1594,6 +1592,7 @@ sub show_change_password {
   print "</div>\n";
   print "<input type='hidden' name='cmd' value='chpass' >\n";
   print "<input type='hidden' name='username' value='".(htmlwrap($auth_username))."' >\n";
+  print "</fieldset>\n";
   print "</form>\n";
 }
 
@@ -1685,7 +1684,7 @@ sub show_warn {
   print "<div class='row-fluid'>\n";
   print "<div class='span8'>\n";
   print "<div class='page-header'>\n";
-  print "<h1>Notifications for ".htmlwrap($auth_fullname)."</h1>\n";
+  print "<h3>Notifications for ".htmlwrap($auth_fullname)."</h3>\n";
   print "</div>\n";
   while (my ($amount,$seen,$accept,$name,$author,$affectuid,$affectgid,$wwhen,$type,$tid,$active) = $sth->fetchrow_array) {
     if (!$warned) {
@@ -1731,9 +1730,9 @@ sub show_history {
   print "<div class='span8'>\n";
   print "<div class='page-header'>\n";
   if (defined $all) {
-    print "<h1>Full history</h1>\n";
+    print "<h3>Full history</h3>\n";
   } else {
-    print "<h1>Recent history</h1>\n";
+    print "<h3>Recent history</h3>\n";
   }
   print "</div>\n";
 
@@ -2609,10 +2608,9 @@ while(1) {
     output_header;
     print "<div class='row-fluid'>\n";
     print "<div class='span8'>\n";
-    print "<div class='page-header'>\n";
-    print "<h1>Edit visible people</h1>\n";
-    print "</div>\n";
     print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
+    print "<fieldset>\n";
+    print "<legend>Edit visible people</legend>\n";
     print "<input type='hidden' name='cmd' value='doev'>\n";
     my %au;
     for (sort {
@@ -2636,6 +2634,7 @@ while(1) {
     print "<input type='submit' value='Submit' class='btn btn-primary'>\n";
     print "</div>\n";
     print "</div>\n";
+    print "</fieldset>\n";
     print "</form>\n";
     print "</div>\n";
     print "</div>\n";
@@ -2735,10 +2734,9 @@ while(1) {
     output_header;
     print "<div class='row-fluid'>\n";
     print "<div class='span8'>\n";
-    print "<div class='page-header'>\n";
-    print "<h1>Log in</h1>\n";
-    print "</div>\n";
     print "<form class='form-horizontal form-horizontal-condensed' name='input' action='".selfurl."' method='post'>\n";
+    print "<fieldset>\n";
+    print "<legend>Log in</legend>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='username'>Username</label>\n";
     print "<div class='controls'>\n";
@@ -2756,11 +2754,11 @@ while(1) {
     print "<input type='submit' value='Log in' class='btn btn-primary'>\n";
     print "</div>\n";
     print "</div>\n";
+    print "</fieldset>\n";
     print "</form>\n";
-    print "<div class='page-header'>\n";
-    print "<h1>Create new account</h1>\n";
-    print "</div>\n";
     print "<form class='form-horizontal form-horizontal-condensed' name='input' action='".selfurl."' method='post'>\n";
+    print "<fieldset>\n";
+    print "<legend>Create new account</legend>\n";
     print "<input type='hidden' name='cmd' value='dona' >\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='newFullname'  >Full Name</label>\n";
@@ -2817,6 +2815,7 @@ while(1) {
     print "<input type='submit' value='Request account' class='btn' >\n";
     print "</div>\n";
     print "</div>\n";
+    print "</fieldset>\n";
     print "</form>\n";
     print "</div>\n";
     print "</div>\n";

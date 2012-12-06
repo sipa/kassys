@@ -529,7 +529,7 @@ sub check_auth {
     $sth4->finish;
   }
   # try password auth
-  if ($auth_level<0 && (defined $username && $username ne '' && ($auth_level>=$MIN_LEVEL_NOPASSSUDO || defined $password))) {
+  if (defined $username && $username ne '' && ($auth_level>=$MIN_LEVEL_NOPASSSUDO || defined $password)) {
     my $sth3=$dbh->prepare("SELECT A.UID,A.KEY,A.LEVEL,U.FULLNAME,U.UNAME,U.ACTIVE,U.AUTOACCEPT FROM ${prefix}PWAUTH AS A, ${prefix}USERS AS U WHERE U.UNAME=? AND U.UID=A.UID");
     $sth3->execute($username);
     my $cnt=0;
@@ -1572,7 +1572,7 @@ sub show_change_password {
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='old_pw'>Old password</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='text' class='span3' id='old_pw' name='password'>\n";
+  print "<input type='password' id='old_pw' class='span3' name='password'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
@@ -2411,31 +2411,69 @@ while(1) {
     }
     need_user_list;
     output_header;
-    if ($pto eq $auth_uid) {
-      print "<h3>Edit payment</h3>\n";
-    } else {
-      print "<h3>View payment</h3>\n";
-    }
-    print "<form name='doep' action='".selfurl."' method='post'>\n";
-    print "<table>\n";
+    print "<div class='row-fluid'>\n";
+    print "<div class='span8'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' name='doep' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='ep_id' value='$tid'>\n";
-    print "<tr class='tblodd'><td>When:</td><td> ".substr($wwhen,0,16)."</td>\n";
+    print "<fieldset>\n";
+    if ($pto eq $auth_uid) {
+      print "<legend>Edit payment</legend>\n";
+    } else {
+      print "<legend>View payment</legend>\n";
+    }
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>When</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input'>".substr($wwhen,0,16)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
     my $pfname=$USERS{$pfrom}->{NAME};
     my $ptname=$USERS{$pto}->{NAME};
-    print "<tr class='tbleven'><td>From:</td><td> ".htmlwrap($pfname)."</td></tr>\n";
-    print "<tr class='tblodd'><td>To:</td><td> ".htmlwrap($ptname)."</td></tr>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>From</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input'>".htmlwrap($pfname)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>To</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input'>".htmlwrap($ptname)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
     if ($pto eq $auth_uid) {
-      print "<tr class='tbleven'><td>Amount:</td><td> <input type='text' name='ep_value' value='".(-$amount)."'></td></tr>\n";
-      print "</table>\n";
+      print "<div class='control-group'>\n";
+      print "<label class='control-label' for='inputItemPrice'>Amount</label>\n";
+      print "<div class='controls'>\n";
+      print "<div class='input-append'>\n";
+      print "<input type='number' id='inputItemPrice' name='ep_value' value='".(-$amount)."'>\n";
+      print "<span class='add-on'>EUR</span>\n";
+      print "</div>\n";
+      print "</div>\n";
+      print "</div>\n";
       print "<input type='hidden' name='cmd' value='doep'>\n";
-      print "<input type='submit' value='Update'>\n" if ($auth_active);
-      print "<input type='submit' name='ep_delete' value='Delete' />\n";
+      print "<div class='control-group'>\n";
+      print "<div class='controls'>\n";
+      print "<input type='submit' class='btn btn-primary' value='Update'>\n" if ($auth_active);
+      print "<input type='submit' class='btn' name='ep_delete' value='Delete'>\n";
+      print "</div>\n";
+      print "</div>\n";
     } else {
-      print "<tr class='tbleven'><td>Amount:</td><td> ".(-$amount)."</td></tr\n";
-      print "</table>\n";
+      print "<div class='control-group'>\n";
+      print "<label class='control-label'>Amount</label>\n";
+      print "<div class='controls'>\n";
+      print "<div class='input-append'>\n";
+      print "<span class='input uneditable-input'>".(-$amount)."</span>\n";
+      print "<span class='add-on'>EUR</span>\n";
+      print "</div>\n";
+      print "</div>\n";
+      print "</div>\n";
     }
-    print "</form><p/>\n";
+    print "</fieldset>\n";
+    print "</form>\n";
     print "<a href='$URL'>Go back</a>\n";
+    print "</div>\n";
+    print "</div>\n";
     $sth->finish;
     output_footer;
     last;

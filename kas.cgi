@@ -1513,25 +1513,25 @@ sub show_change_settings {
   print "<div class='control-group'>\n";
   print "<label class='control-label'>User name</label>\n";
   print "<div class='controls'>\n";
-  print "<span class='input uneditable-input span3'>".htmlwrap($uname)."</span>\n";
+  print "<span class='input uneditable-input span5'>".htmlwrap($uname)."</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='fullName'>Full name</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='text' class='span3' id='fullName' name='cp_fullname' value='".htmlwrap($fullname)."'>\n";
+  print "<input type='text' class='span5' id='fullName' name='cp_fullname' value='".htmlwrap($fullname)."'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='BAN'>Bank account number</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='text' class='span3' id='BAN' name='cp_accnr' value='".htmlwrap($accnr)."' placeholder='BE12 3456 7890 1234'>\n";
+  print "<input type='text' class='span5' id='BAN' name='cp_accnr' value='".htmlwrap($accnr)."'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='autoaccept'>By default, deny charges above</label>\n";
   print "<div class='controls'>\n";
-  print "<div class='input-append span3'>\n";
+  print "<div class='input-append span5'>\n";
   print "<input type='number' id='autoaccept' class='span12' name='cp_autoaccept' value='".htmlwrap($autoaccept)."'>\n";
   print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
@@ -1540,19 +1540,19 @@ sub show_change_settings {
   print "<div class='control-group'>\n";
   print "<label class='control-label'>E-mail address</label>\n";
   print "<div class='controls'>\n";
-  print "<span class='input uneditable-input span3'>".htmlwrap($email)."</span>\n";
+  print "<span class='input uneditable-input span5'>".htmlwrap($email)."</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label'>Account balance</label>\n";
   print "<div class='controls'>\n";
-  print "<span style='color:".($total>=0 ? 'black' : 'red')."' class='input uneditable-input span3'>".sprintf("$UNIT %.4f",abs($total))."</span>\n";
+  print "<span style='color:".($total>=0 ? 'black' : 'red')."' class='input uneditable-input span5'>".sprintf("$UNIT %.4f",abs($total))."</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label'>Creation date</label>\n";
   print "<div class='controls'>\n";
-  print "<span class='input uneditable-input span3'>".htmlwrap(substr($created,0,16))."</span>\n";
+  print "<span class='input uneditable-input span5'>".htmlwrap(substr($created,0,16))."</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
@@ -1572,19 +1572,19 @@ sub show_change_password {
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='old_pw'>Old password</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='password' id='old_pw' class='span3' name='password'>\n";
+  print "<input type='password' id='old_pw' class='span5' name='password'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='new_pw' >New password</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='password' id='new_pw' class='span3' name='newpass1' placeholder='6 characters minimum'>\n";
+  print "<input type='password' id='new_pw' class='span5' name='newpass1' placeholder='6 characters minimum'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
   print "<label class='control-label' for='new_pw_repeat'>Repeat</label>\n";
   print "<div class='controls'>\n";
-  print "<input type='password' id='new_pw_repeat' name='newpass2' class='span3' placeholder='6 characters minimum'>\n";
+  print "<input type='password' id='new_pw_repeat' name='newpass2' class='span5' placeholder='6 characters minimum'>\n";
   print "</div>\n";
   print "</div>\n";
   print "<div class='control-group'>\n";
@@ -2607,6 +2607,8 @@ while(1) {
   } elsif ($menu eq 'connections' && defined $auth_username) {
     need_user_list(1);
     output_header;
+    print "<div class='row-fluid'>\n";
+    print "<div class='span8'>\n";
     print "<div class='page-header'>\n";
     print "<h1>Edit visible people</h1>\n";
     print "</div>\n";
@@ -2635,6 +2637,8 @@ while(1) {
     print "</div>\n";
     print "</div>\n";
     print "</form>\n";
+    print "</div>\n";
+    print "</div>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;
@@ -2700,15 +2704,22 @@ while(1) {
     output_footer;
   } elsif ($menu eq 'add') {
     output_header;
+    print "<div class='row-fluid'>\n";
+    print "<div class='span8'>\n";
     show_form_add_pay;
     show_form_add_item;
     show_form_add_bill;
+    print "</div>\n";
+    print "</div>\n";
     output_footer;
   } elsif ($menu eq 'settings') {
     output_header;
+    print "<div class='row-fluid'>\n";
+    print "<div class='span8'>\n";
     show_change_settings;
-    print "<br/>\n";
     show_change_password;
+    print "</div>\n";
+    print "</div>\n";
     output_footer;
   } elsif ($menu eq 'login') {
     my $alreadyht=0;
@@ -2722,6 +2733,8 @@ while(1) {
       }
     }
     output_header;
+    print "<div class='row-fluid'>\n";
+    print "<div class='span8'>\n";
     print "<div class='page-header'>\n";
     print "<h1>Log in</h1>\n";
     print "</div>\n";
@@ -2805,6 +2818,8 @@ while(1) {
     print "</div>\n";
     print "</div>\n";
     print "</form>\n";
+    print "</div>\n";
+    print "</div>\n";
     output_footer;
   } elsif ($menu eq 'empty') {
     output_header;

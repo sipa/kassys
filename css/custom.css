@@ -62,12 +62,7 @@ body {
     margin-left: 230px;
 }
 
-.row-fluid .span4 {
-    width: 31.914893617021278%;
-    *width: 31.861702127659576%;
-}
-
-.row-fluid .span3 {
-    width: 23.404255319148934%;
-    *width: 23.351063829787233%;
+.row-fluid .span5 {
+    width: 40.42553191489362%;
+    *width: 40.37234042553192%;
 }

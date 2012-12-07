@@ -40,9 +40,7 @@ body {
 }
 
 .table-condensed input[type="radio"],
-.table-condensed input[type="checkbox"],
-.form-horizontal input[type="radio"],
-.form-horizontal input[type="checkbox"]
+.form-horizontal input[type="radio"]
 {
     vertical-align: top !important;
 }
@@ -65,4 +63,13 @@ body {
 .row-fluid .span5 {
     width: 40.42553191489362%;
     *width: 40.37234042553192%;
+}
+
+.row-fluid .span4 {
+    width: 31.914893617021278%;
+    *width: 31.861702127659576%;
+}
+
+.table-centered td {
+    vertical-align: middle;
 }

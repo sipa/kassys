@@ -2289,7 +2289,7 @@ while(1) {
     print "<tr class='tblodd'><td>When:</td><td>".substr($wwhen,0,16)."</td></tr>\n";
     print "<tr class='tbleven'><td>Paid by:</td><td> ".htmlwrap($USERS{$wanter}->{NAME})."</td></tr>\n";
     print "<tr class='tblodd'><td>Paid for:</td><td> <a href='".genurl('group',$wantedg)."'>".htmlwrap($GROUPS{$wantedg}->{DNAME})."</a></td></tr>\n" if (defined $wantedg);
-    print "<tr class='tblodd'><td>Paid for:</td><td> ".htmlwrap($USERS{$wantedu}->{NAME})."</a></td></tr>\n" if (defined $wantedu);
+    print "<tr class='tblodd'><td>Paid for:</td><td> ".htmlwrap($USERS{$wantedu}->{NAME})."</td></tr>\n" if (defined $wantedu);
     if ($wanter eq $auth_uid) {
       print "<tr class='tbleven'><td>Name:</td><td> <input type='text' name='ew_name' value='".htmlwrap($name)."'></td></tr>\n";
       print "<tr class='tblodd'><td>Description:</td><td><textarea rows='3' cols='60' name='ew_name'>".htmlwrap($descr,1)."</textarea></td></tr>\n";

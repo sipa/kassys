@@ -60,6 +60,11 @@ body {
     margin-left: 230px;
 }
 
+.row-fluid .span8 {
+    width: 65.95744680851064%;
+    *width: 65.90425531914893%;
+}
+
 .row-fluid .span5 {
     width: 40.42553191489362%;
     *width: 40.37234042553192%;

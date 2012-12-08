@@ -1819,12 +1819,13 @@ sub output_header {
   print "<li ".($path[0] eq 'add' ? 'class="active"' : '')."><a accesskey=\"a\" href=\"".genurl('add')."\">New transaction</a></li>\n" if (defined $auth_username);
   print "<li ".($path[0] eq 'connections' ? 'class="active"' : '')."><a accesskey=\"c\" href=\"".genurl('connections')."\">Connections</a></li>\n"if (defined $auth_username);
   print "<li ".($path[0] eq 'history' ? 'class="active"' : '')."><a accesskey=\"h\" href=\"".genurl('history')."\">Full history</a></li>\n"if (defined $auth_username);
+  print "<li ".($path[0] eq 'settings' ? 'class="active"' : '')."><a accesskey=\"s\" href=\"".genurl('settings')."\">Settings</a></li>\n" if (defined $auth_username);
+  print "<li>&nbsp;</li>\n";
   print "<li ".($path[0] eq 'payment' ? 'class="active"' : '')."><a href=\"".selfurl."\">Payment</a></li>\n" if (defined $auth_username && $path[0] eq 'payment');
   print "<li ".($path[0] eq 'item' ? 'class="active"' : '')."><a href=\"".selfurl."\">Item</a></li>\n" if (defined $auth_username && $path[0] eq 'item');
   print "<li ".($path[0] eq 'group' ? 'class="active"' : '')."><a href=\"".selfurl."\">Group</a></li>\n" if (defined $auth_username && $path[0] eq 'group');
   print "<li ".($path[0] eq 'bill' ? 'class="active"' : '')."><a href=\"".selfurl."\">Bill</a></li>\n" if (defined $auth_username && $path[0] eq 'bill');
-  print "<li ".($path[0] eq 'settings' ? 'class="active"' : '')."><a accesskey=\"s\" href=\"".genurl('settings')."\">Settings</a></li>\n" if (defined $auth_username);
-  print "<li>&nbsp;</li>\n";
+  print "<li>&nbsp;</li>\n" if (defined $auth_username && ($path[0] eq 'payment' || $path[0] eq 'item' || $path[0] eq 'group' || $path[0] eq 'bill'));
   print "<li ".($path[0] eq 'activate' ? 'class="active"' : '')."><a href=\"".selfurl."\">Account activation</a></li>\n" if (defined $path[0] && $path[0] eq 'activate');
   print "<li ".($path[0] eq 'help' ? 'class="active"' : '')."><a accesskey=\"?\" href=\"".genurl((defined $path[0] && $path[0] eq 'help') ? 'help' : ('help',@path))."\">Help</a></li>\n";
   print "<li>&nbsp;</li>\n";
@@ -2636,24 +2637,66 @@ while(1) {
       next;
     }
     output_header;
-    if ($definer == $auth_uid) {
-      print "<h3>Edit bill</h3>\n";
-    } else {
-      print "<h3>View bill</h3>\n";
-    }
-    print "To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages<p/>\n";
-    print "<form name='doeb' action='".selfurl."' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' name='doeb' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='eb_id' value='$tid'>\n";
-    print "<table>\n";
-    print "<tr class='tblodd'><td>When:</td><td>".substr($wwhen,0,16)."</td></tr>\n";
-    print "<tr class='tbleven'><td>Paid by:</td><td> ".htmlwrap($USERS{$definer}->{NAME})."</td></tr>\n";
+    print "<fieldset>\n";
+    if ($definer == $auth_uid) {
+       print "<legend>Edit bill</legend>\n";
+    } else {
+      print "<legend>View bill</legend>\n";
+    }
+    print "<div class='control-group'>\n";
+    print "<div class='controls'>\n";
+    print "To learn more about bills, see the <a href='".genurl('help','bill')."'>help</a> pages\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>When</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input span8'>".substr($wwhen,0,16)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Paid by</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input span8'>".htmlwrap($USERS{$definer}->{NAME})."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
     my ($ndef,$err,$tot,$cont,@eff)=process_bill($definition,$definer==$auth_uid ? 2 : 1);
-    print "<tr class='tblodd'><td>Name:</td><td> <input type='text' name='eb_name' value='".htmlwrap($name)."'></td></tr>\n";
-    print "<tr class='tbleven'><td>Description:</td><td><textarea rows='3' cols='60' name='eb_descr'>".htmlwrap($descr,1)."</textarea></td></tr>\n";
-    print "<tr class='tblodd'><td>Total amount:</td><td>".sprintf("$UNIT%.2f",$tot)."</td></tr>\n";
-    print "<tr class='tbleven'><td>Contributions:</td><td>".sprintf("$UNIT%.2f",$cont)."</td></tr>\n";
-    print "<tr class='tblodd'><td>Bill:</td><td><textarea rows='20' cols='60' name='eb_def'>".htmlwrap($ndef,1)."</textarea></td></tr>\n";
-    print "<tr class='tbleven'><td>Personal detail:</td><td><ul>";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Name</label>\n";
+    print "<div class='controls'>\n";
+    print "<input type='text' name='eb_name' class='span8' value='".htmlwrap($name)."'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Description</label>\n";
+    print "<div class='controls'>\n";
+    print "<textarea rows='3' cols='60' class='span8' name='eb_descr'>".htmlwrap($descr,1)."</textarea>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Total amount</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input span8'>".sprintf("$UNIT%.2f",$tot)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Contributions</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input span8'>".sprintf("$UNIT%.2f",$cont)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Bill</label>\n";
+    print "<div class='controls'>\n";
+    print "<textarea rows='20' cols='60' class='span8' name='eb_def'>".htmlwrap($ndef,1)."</textarea>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Personal detail</label>\n";
+    print "<div class='controls'>\n";
+    print "<ul>\n";
     foreach my $eff (@eff) {
       my ($uid,$num,$den,$amount,$name)=@{$eff};
       if ($uid==$auth_uid && $num!=0 && $amount != 0) {
@@ -2675,16 +2718,20 @@ while(1) {
         print "]</li>\n";
       }
     }
-    print "</ul></td></tr>\n";
+    print "</ul>\n";
+    print "</div>\n";
+    print "</div>\n";
     if ($definer eq $auth_uid) {
+      print "<div class='control-group'>\n";
       print "<input type='hidden' name='cmd' value='doeb'>\n";
-      print "</table>\n";
-      print "<input type='submit' value='Save' />" if ($auth_active);
-      print "<input type='submit' name='eb_delete' value='Delete' />";
-    } else {
-      print "</table>\n";
+      print "<div class='controls'>\n";
+      print "<input type='submit' class='btn btn-primary' value='Save'>\n" if ($auth_active);
+      print "<input type='submit' class='btn btn-danger' name='eb_delete' value='Delete'>\n";
+      print "</div>\n";
+      print "</div>\n";
     }
-    print "</form><br/>";
+    print "</fieldset>\n";
+    print "</form>\n";
     print "<a href='$URL'>Go back</a>\n";
     $sth->finish;
     output_footer;

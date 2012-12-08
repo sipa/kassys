@@ -1264,7 +1264,7 @@ sub show_form_add_pay {
   print "<label class='control-label' for='inputAmount'>paid me</label>\n";
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
-  print "<input type='number' id='inputAmount' placeholder='0.00' name='ap_value'>\n";
+  print "<input type='text' id='inputAmount' placeholder='0.00' name='ap_value'>\n";
   print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1315,7 +1315,7 @@ sub show_form_add_item {
   print "<label class='control-label' for='inputItemPrice'>I paid</label>\n";
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
-  print "<input type='number' name='aw_value' id='inputItemPrice' placeholder='0.00'>\n";
+  print "<input type='text' name='aw_value' id='inputItemPrice' placeholder='0.00'>\n";
   print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1403,8 +1403,8 @@ sub show_totals {
   print "<table class='table table-striped table-condensed'>\n";
   print "<thead>\n";
   print "<tr>\n";
-  print "<th width='80%'>Name</th>\n";
-  print "<th class='text-align-right' width='20%'>Total</th>\n";
+  print "<th width='78%'>Name</th>\n";
+  print "<th class='text-align-right' width='22%'>Total</th>\n";
   print "</tr>\n";
   print "</thead>\n";
   print "<tbody>\n";
@@ -1440,8 +1440,8 @@ sub show_totals {
   print "<table class='table table-striped table-condensed'>\n";
   print "<thead>\n";
   print "<tr>\n";
-  print "<th width='80%'>Name</th>\n";
-  print "<th class='text-align-right' width='20%'>Total</th>\n";
+  print "<th width='78%'>Name</th>\n";
+  print "<th class='text-align-right' width='22%'>Total</th>\n";
   print "</tr>\n";
   print "</thead>\n";
   print "<tbody>\n";
@@ -1530,7 +1530,7 @@ sub show_change_settings {
   print "<label class='control-label' for='autoaccept'>By default, deny charges above</label>\n";
   print "<div class='controls'>\n";
   print "<div class='input-append span4'>\n";
-  print "<input type='number' id='autoaccept' class='span12' name='cp_autoaccept' value='".htmlwrap($autoaccept)."'>\n";
+  print "<input type='text' id='autoaccept' class='span12' name='cp_autoaccept' value='".htmlwrap($autoaccept)."'>\n";
   print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
@@ -2376,7 +2376,7 @@ while(1) {
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Max. assignments</label>\n";
     print "<div class='controls'>\n";
-    print "<input type='number' name='eg_max' value='".(param('eg_max') || $gte->{MAXFORM}||"")."'>\n";
+    print "<input type='text' name='eg_max' value='".(param('eg_max') || $gte->{MAXFORM}||"")."'>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
@@ -2490,7 +2490,7 @@ while(1) {
       print "<label class='control-label' for='inputItemPrice'>Amount</label>\n";
       print "<div class='controls'>\n";
       print "<div class='input-append'>\n";
-      print "<input type='number' id='inputItemPrice' name='ep_value' value='".(-$amount)."'>\n";
+      print "<input type='text' id='inputItemPrice' name='ep_value' value='".(-$amount)."'>\n";
       print "<span class='add-on'>EUR</span>\n";
       print "</div>\n";
       print "</div>\n";

@@ -39,6 +39,11 @@ body {
     margin-bottom: 5px !important;
 }
 
+.form-horizontal-condensed input + .help-block {
+    margin-top: 0 !important;
+    margin-bottom: 5px !important;
+}
+
 .table-condensed input[type="radio"],
 .form-horizontal input[type="radio"]
 {

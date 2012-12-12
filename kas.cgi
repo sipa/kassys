@@ -34,8 +34,8 @@ use Data::Dumper;
 # version
 my $SYSTEM="Kassys";
 my $MAJOR=0;
-my $MINOR=9;
-my $REVISION=196;
+my $MINOR=10;
+my $REVISION="89eb015090";
 my $VERSION="$SYSTEM v$MAJOR.$MINOR.$REVISION";
 # REV=$(svn log kas.cgi | egrep '^r[0-9]+ ' | wc -l); sed -re "s/ \\\$REVISION=[0-9]+;/ \$REVISION=$REV;/" -i kas.cgi
 
@@ -1812,7 +1812,7 @@ sub output_header {
   print "<div class='container-fluid'>\n";
   print "<div class='row-fluid'>\n";
   print "<div class='span2'>\n";
-  print "<div class='well sidebar-nav'>\n";
+  print "<div class='well sidebar-nav span2'>\n";
   print "<ul class='nav nav-list'>\n";
   print "<li class='nav-header'>Menu</li>\n";
   print "<li ".($path[0] eq 'overview' ? 'class="active"' : '')."><a accesskey=\"o\" href=\"$URL\">Overview</a></li>\n" if (defined $auth_username);
@@ -1851,7 +1851,7 @@ sub output_footer {
   print "<!--/row-->\n";
   print "<hr>\n";
   print "<footer>\n";
-  print "<p class='pull-right'>&copy; 2006-2012 by Pieter Wuille & Samuel Van Reeth powered by $VERSION</p>\n";
+  print "<p class='pull-right text-align-right'>&copy; 2006-2012 by Pieter Wuille & Samuel Van Reeth<br>powered by $VERSION</p>\n";
   print " </footer>\n";
   print "</div>\n";
   print "<!--/.fluid-container-->\n";

@@ -25,6 +25,7 @@ body {
 
 .sidebar-nav {
     padding: 9px 0;
+    position: fixed;
 }
 
 .table-condensed .progress {

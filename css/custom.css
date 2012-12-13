@@ -18,52 +18,50 @@
     color: #999999;
 }
 
-body {
-    padding-top: 60px;
-    padding-bottom: 30px;
-}
-
-.sidebar-nav {
-    padding: 9px 0;
-    position: fixed;
-}
-
 .table-condensed .progress {
     margin-bottom: 0px !important;
 }
 
-.form-horizontal-super-condensed .control-group {
-    margin-bottom: 0px !important;
-}
+@media (min-width: 768px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+    .sidebar-nav {
+        padding: 9px 0;
+        position: fixed;
+    }
 
-.form-horizontal-condensed .control-group {
-    margin-bottom: 5px !important;
-}
+    .form-horizontal-super-condensed .control-group {
+        margin-bottom: 0px !important;
+    }
 
-.form-horizontal-condensed input + .help-block {
-    margin-top: 0 !important;
-    margin-bottom: 5px !important;
-}
+    .form-horizontal-condensed .control-group {
+        margin-bottom: 5px !important;
+    }
 
-.table-condensed input[type="radio"],
-.form-horizontal input[type="radio"]
-{
-    vertical-align: top !important;
-}
+    .form-horizontal-condensed input + .help-block {
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+    }
 
+    .table-condensed input[type="radio"],
+    .form-horizontal input[type="radio"] {
+        vertical-align: top !important;
+    }
 
-.form-horizontal-super-condensed input[type="radio"],
-.form-horizontal-super-condensed input[type="checkbox"]
-{
-    vertical-align: bottom !important;
-}
+    .form-horizontal-super-condensed input[type="radio"],
+    .form-horizontal-super-condensed input[type="checkbox"] {
+        vertical-align: bottom !important;
+    }
 
-.form-horizontal-wide .control-label {
-    width: 210px;
-}
+    .form-horizontal-wide .control-label {
+        width: 210px;
+    }
 
-.form-horizontal-wide .controls {
-    margin-left: 230px;
+    .form-horizontal-wide .controls {
+        margin-left: 230px;
+    }
 }
 
 .row-fluid .span8 {

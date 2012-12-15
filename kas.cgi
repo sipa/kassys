@@ -35,7 +35,7 @@ use Data::Dumper;
 my $SYSTEM="Kassys";
 my $MAJOR=0;
 my $MINOR=10;
-my $REVISION="89eb015090";
+my $REVISION=0;
 my $VERSION="$SYSTEM v$MAJOR.$MINOR.$REVISION";
 # REV=$(svn log kas.cgi | egrep '^r[0-9]+ ' | wc -l); sed -re "s/ \\\$REVISION=[0-9]+;/ \$REVISION=$REV;/" -i kas.cgi
 
@@ -44,7 +44,7 @@ my $DENOM=18018000;        # 18018000 = kgv(2,3,4,5,6,7,8,9,10,11,12,13,14,15,16
 my $PCT=1.03;              # (annual) interest ratio for annuity corrections
 my $SEC_PER_YEAR=31556952; # average number of seconds in gregorian year
 my $THRESHOLD=0.005;       # differences below this many monetary units are ignored
-my $SESSION_TIME=30;       # session lifetime, in minutes
+my $SESSION_TIME=15;       # session lifetime, in minutes
 my $UNIT="&#8364; ";       # monetary unit
 
 # boolean configuration parameters
@@ -299,7 +299,7 @@ sub connect_db {
   my $host=$CONF{dbhost} || "localhost";
   my $dbusername=$CONF{dbuser};
   my $dbpassword=$CONF{dbpass};
-  $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$host", $dbusername, $dbpassword,{AutoCommit => 1,RaiseError => 0}) or die "Unable to connect: $DBI::errstr\n";
+  $dbh = DBI->connect("dbi:Pg:dbname=$dbname;host=$host", $dbusername, $dbpassword,{AutoCommit => 1,RaiseError => 0});
   $prefix=defined($CONF{dbprefix}) ? "$CONF{dbprefix}_" : "";
   $title=$CONF{title} || $VERSION;
   $htmltitle=$CONF{htmltitle} || $title;
@@ -1782,7 +1782,7 @@ sub days_to_neutral {
 sub output_header {
   my @cookies=();
   if (defined $session) {
-    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{SERVER_NAME}, -path => $DIR, -expires => "+${SESSION_TIME}m");
+    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{HTTP_HOST}, -path => $DIR, -expires => "+${SESSION_TIME}m");
     #log_action "COOKIE: ".(join('|',%cookiedata));
     push @cookies,cookie(%cookiedata);
   }
@@ -1943,9 +1943,9 @@ if ($command eq 'dona') {
       push @msg,['error',"Cannot add user, try again or inform administrator"];
     }
     if ($ok) {
-      # $ok=open(PIPE,"|mail -s 'New account: $title' ".(defined($mailfrom) ? "-a 'From: $mailfrom'" : "")." '$email'");
-      # if ($ok) { print PIPE "Hello $fullname,\n\na new $title account has been created for you.\nTo activate it, use this link:\n\n  ".url(-base=>1).genurl('activate',$rid)."\n\n-- \nKind regards,\n$title mailer\n"; }
-      # $ok=(close PIPE) if ($ok);
+      $ok=open(PIPE,"|mail -s 'New account: $title' ".(defined($mailfrom) ? "-a 'From: $mailfrom'" : "")." '$email'");
+      if ($ok) { print PIPE "Hello $fullname,\n\na new $title account has been created for you.\nTo activate it, use this link:\n\n  ".url(-base=>1).genurl('activate',$rid)."\n\n-- \nKind regards,\n$title mailer\n"; }
+      $ok=(close PIPE) if ($ok);
       push @msg,['info',"An activation code was mailed to ".htmlwrap($email).". It will remain valid for a week."] if ($ok);
       push @msg,['error',"Could not send e-mail. Try again or contact administrator."] if (!$ok);
     }
@@ -2551,28 +2551,13 @@ while(1) {
     } else {
       print "<legend>View item</legend>\n";
     }
-    print "<div class='control-group'>\n";
-    print "<label class='control-label'>When</label>\n";
-    print "<div class='controls'>\n";
-    print "<span class='input uneditable-input'>".substr($wwhen,0,16)."</span>\n";
-    print "</div>\n";
-    print "</div>\n";
-    print "<div class='control-group'>\n";
-    print "<label class='control-label'>Paid by</label>\n";
-    print "<div class='controls'>\n";
-    print "<span class='input uneditable-input'>".htmlwrap($USERS{$wanter}->{NAME})."</span>\n";
-    print "</div>\n";
-    print "</div>\n";
-    print "<div class='control-group'>\n";
-    print "<label class='control-label'>Paid for</label>\n";
-    print "<div class='controls'>\n";
-      print "<span class='input uneditable-input'><a href='".genurl('group',$wantedg)."'>".htmlwrap($GROUPS{$wantedg}->{DNAME})."</a></span>\n" if (defined $wantedg);
-      print "<span class='input uneditable-input'>".htmlwrap($USERS{$wantedu}->{NAME})."</span>\n" if (defined $wantedu);
-    print "</div>\n";
-    print "</div>\n";
-    print "<div class='control-group'>\n";
-    print "<label class='control-label'>Name</label>\n";
-    print "<div class='controls'>\n";
+    print "<form name='doew' action='".selfurl."' method='post'>\n";
+    print "<input type='hidden' name='ew_id' value='$tid'>\n";
+    print "<table>\n";
+    print "<tr class='tblodd'><td>When:</td><td>".substr($wwhen,0,16)."</td></tr>\n";
+    print "<tr class='tbleven'><td>Paid by:</td><td> ".htmlwrap($USERS{$wanter}->{NAME})."</td></tr>\n";
+    print "<tr class='tblodd'><td>Paid for:</td><td> <a href='".genurl('group',$wantedg)."'>".htmlwrap($GROUPS{$wantedg}->{DNAME})."</a></td></tr>\n" if (defined $wantedg);
+    print "<tr class='tblodd'><td>Paid for:</td><td> ".htmlwrap($USERS{$wantedu}->{NAME})."</a></td></tr>\n" if (defined $wantedu);
     if ($wanter eq $auth_uid) {
       print "<input type='text' name='ew_name' value='".htmlwrap($name)."'>\n";
     } else {
@@ -2761,13 +2746,7 @@ while(1) {
       }
     }
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<div class='control-group'>\n";
-    print "<div class='control-label'>\n";
-    print "<input type='submit' value='Submit' class='btn btn-primary'>\n";
-    print "</div>\n";
-    print "</div>\n";
-    print "</fieldset>\n";
-    print "</form>\n";
+    print "<p/><input type='submit' value='Submit'>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

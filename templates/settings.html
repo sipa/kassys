@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kassys v1 Mockup - Settings</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Kassys 2.0</a>
+            <ul class="nav pull-right">
+                <li><p class="navbar-text">Logged in as Ferdinand English</p></li>
+                <li class="divider-vertical"></li>
+                <li><a href="login.html" class="navbar-link">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Menu</li>
+                    <li><a href="overview.html">Overview</a></li>
+                    <li><a href="transaction.html">New transaction</a></li>
+                    <li><a href="connections.html">Connections</a></li>
+                    <li><a href="history.html">Full history</a></li>
+                    <li class="active"><a href="settings.html">Settings</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="payment.html">Payment</a></li>
+                    <li><a href="group.html">Group</a></li>
+                    <li><a href="item.html">Item</a></li>
+                    <li><a href="bill.html">Bill</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="#">Help</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="login.html">Log out</a></li>
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span7">
+            <div class="container-fluid">
+
+                <form class="form-horizontal form-horizontal-condensed form-horizontal-wide form-horizontal-large" >
+                    <fieldset>
+                        <legend>Profile settings</legend>
+                        <div class="control-group">
+                            <label class="control-label">User name</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">ferdi</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label" for="fullName">Full name</label>
+
+                            <div class="controls">
+                                <input type='text'  id="fullName" name='cp_fullname' value='Ferdinand English'>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for='newIBAN'>Bank account number</label>
+
+                            <div class="controls">
+                                <input type='text' id='newIBAN' placeholder="BE12 3456 7890 1234">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemPrice">By default, deny charges above</label>
+                            <div class="controls">
+                                <div class="input-append">
+                                    <input type="number" id="inputItemPrice" value='50.0000'>
+                                    <span class="add-on">EUR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">E-mail address</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">Ferdinand.English@something.com</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Account balance</label>
+
+                            <div class="controls">
+                                <span style='color:black' class="input uneditable-input">&#8364; 12.65</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <label class="control-label">Creation date</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">2012-12-02 14:43</span>
+                            </div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="overview.html" type="submit" class="btn">Change settings</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <form class="form-horizontal form-horizontal-condensed form-horizontal-wide form-horizontal-large">
+                    <fieldset>
+                        <legend>Change Password</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="old_pw">Old password</label>
+
+                            <div class="controls">
+                                <input type='text'id='old_pw'>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="new_pw">New password</label>
+
+                            <div class="controls">
+                                <input type="password" id="new_pw" placeholder="6 characters minimum">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="new_pw_repeat">Repeat</label>
+
+                            <div class="controls">
+                                <input type="password" id="new_pw_repeat" placeholder="6 characters minimum">
+
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="overview.html" type="submit" class="btn">Change password</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <hr>
+
+    <footer>
+        <p>&copy; Samuel Van Reeth 2012</p>
+    </footer>
+
+</div>
+<!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+
+</body>
+</html>

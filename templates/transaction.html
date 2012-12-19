@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kassys v1 Mockup - Transaction</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Kassys 2.0</a>
+            <ul class="nav pull-right">
+                <li><p class="navbar-text">Logged in as Ferdinand English</p></li>
+                <li class="divider-vertical"></li>
+                <li><a href="login.html" class="navbar-link">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Menu</li>
+                    <li><a href="overview.html">Overview</a></li>
+                    <li class="active"><a href="transaction.html">New transaction</a></li>
+                    <li><a href="connections.html">Connections</a></li>
+                    <li><a href="history.html">Full history</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="payment.html">Payment</a></li>
+                    <li><a href="group.html">Group</a></li>
+                    <li><a href="item.html">Item</a></li>
+                    <li><a href="bill.html">Bill</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="#">Help</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="login.html">Log out</a></li>
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span7">
+            <div class="container-fluid">
+
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+                        <legend>New payment</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="inputUser">User</label>
+
+                            <div class="controls">
+                                <select id="inputUser">
+                                    <option>Joy Webster</option>
+                                    <option>Chloe Branch</option>
+                                    <option>Stewart Norton</option>
+                                    <option>Risa Meyer</option>
+                                    <option>Zena Vasquez</option>
+                                    <option>Kasper Strickland</option>
+                                    <option>Abdul Wright</option>
+                                    <option>Uta Mcclure</option>
+                                    <option>Naomi Jacobson</option>
+                                    <option>Nora Harrison</option>
+                                    <option>Clark Calhoun</option>
+                                    <option>Fiona Bender</option>
+                                    <option>Ferdinand English</option>
+                                    <option>Ella Cooke</option>
+                                    <option>Bo Gilbert</option>
+                                    <option>Chaney Mcpherson</option>
+                                    <option>Ella Hall</option>
+                                    <option>Nina Charles</option>
+                                    <option>Angela Lambert</option>
+                                    <option>Reagan Barry</option>
+                                    <option>Ingrid Franks</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputAmount">paid me</label>
+
+                            <div class="controls">
+                                <div class="input-append">
+                                    <input type="number" id="inputAmount" placeholder="Amount">
+                                    <span class="add-on">EUR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <button class="btn" type="submit">Add payment</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+                        <legend>New item</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemPrice">I paid</label>
+
+                            <div class="controls">
+                                <div class="input-append">
+
+                                    <input type="number" id="inputItemPrice" placeholder="price">
+                                    <span class="add-on">EUR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemName">on item</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputItemName" placeholder="item">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemDescription">with description</label>
+
+                            <div class="controls">
+                                <input type="text" id="inputItemDescription" placeholder="description">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputUser">for user <input type="radio" name="rd_forType" value="user"></label>
+
+                            <div class="controls">
+
+                                <select id="inputItemForUser">
+                                    <option>Joy Webster</option>
+                                    <option>Chloe Branch</option>
+                                    <option>Stewart Norton</option>
+                                    <option>Risa Meyer</option>
+                                    <option>Zena Vasquez</option>
+                                    <option>Kasper Strickland</option>
+                                    <option>Abdul Wright</option>
+                                    <option>Uta Mcclure</option>
+                                    <option>Naomi Jacobson</option>
+                                    <option>Nora Harrison</option>
+                                    <option>Clark Calhoun</option>
+                                    <option>Fiona Bender</option>
+                                    <option>Ferdinand English</option>
+                                    <option>Ella Cooke</option>
+                                    <option>Bo Gilbert</option>
+                                    <option>Chaney Mcpherson</option>
+                                    <option>Ella Hall</option>
+                                    <option>Nina Charles</option>
+                                    <option>Angela Lambert</option>
+                                    <option>Reagan Barry</option>
+                                    <option>Ingrid Franks</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemGroup">for new group <input type="radio" name="rd_forType" value="new_group"></label>
+
+                            <div class="controls">
+
+                                <input type="text" id="inputItemGroup" placeholder="group name">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputItemForGroup">for existing group <input type="radio" name="rd_forType" value="existing_group"></label>
+
+                            <div class="controls">
+
+                                <select id="inputItemForGroup">
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <button class="btn" type="submit">Add item</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+                        <legend>New bill
+                            <small> To learn more about bills, see the <a href='#'>help</a> pages</small>
+                        </legend>
+                        <div class="control-group">
+                            <label class="control-label" for="billName">I paid bill </label>
+
+                            <div class="controls">
+                                <input type="text" id="billName" placeholder="name">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="billDescription">with description</label>
+
+                            <div class="controls">
+                                <input type="text" id="billDescription" placeholder="description">
+                            </div>
+                        </div>
+                        <div class="control-group">
+
+                            <div class="controls">
+                                <button class="btn" type="submit">Add bill</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <hr>
+
+    <footer>
+        <p>&copy; Samuel Van Reeth 2012</p>
+    </footer>
+
+</div>
+<!--/.fluid-container-->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+
+</body>
+</html>

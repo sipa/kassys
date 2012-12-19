@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Kassys v1 Mockup - Login</title>
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="../css/custom.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container-fluid">
+            <a class="brand" href="#">Kassys 2.0</a>
+            <ul class="nav pull-right">
+                <li><p class="navbar-text">Not logged in</p></li>
+            </ul>
+
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="row-fluid">
+        <div class="span2">
+            <div class="well sidebar-nav">
+                <ul class="nav nav-list">
+                    <li class="nav-header">Menu</li>
+                    <li class="active"><a href="#">Login</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="#">Help</a></li>
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class="span7">
+            <div class="container-fluid">
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+
+                        <legend>Log in</legend>
+
+                        <div class="control-group">
+                            <label class="control-label" for="username">Username</label>
+
+                            <div class="controls">
+                                <input type='text' id='username' placeholder="Username">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="inputPassword">Password</label>
+
+                            <div class="controls">
+                                <input type="password" id="inputPassword" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="overview.html" type="submit" class="btn btn-primary">Log in</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+                        <legend>Create new account</legend>
+                        <div class="control-group">
+                            <label class="control-label" for="newFullname">Full Name</label>
+
+                            <div class="controls">
+                                <input type='text' id='newFullname' placeholder="John Doe">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="newEmail">E-mail address</label>
+
+                            <div class="controls">
+                                <input type='email' id='newEmail' placeholder="john.doe@something">
+                                <span class="help-block">Must be unique</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="newIBAN">Bank account number</label>
+
+                            <div class="controls">
+                                <input type='text' id='newIBAN' placeholder="BE12 3456 7890 1234">
+                                <span class="help-block">Optional</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="newUsername">Username</label>
+
+                            <div class="controls">
+                                <input type='text' id='newUsername' placeholder="jdoe">
+                                <span class="help-block">Must be unique</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="newPassword">Password</label>
+
+                            <div class="controls">
+                                <input type="password" id="newPassword" placeholder="6 characters minimum">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label" for="newRepeatPassword">Repeat Password</label>
+
+                            <div class="controls">
+                                <input type="password" id="newRepeatPassword" placeholder="6 characters minimum">
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <a href="overview.html" type="submit" class="btn">Request Account</a>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /row -->
+    <hr>
+
+    <footer>
+        <p>&copy; Samuel Van Reeth 2012</p>
+    </footer>
+
+</div>
+<!-- /container -->
+
+<!-- Le javascript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+
+</body>
+</html>

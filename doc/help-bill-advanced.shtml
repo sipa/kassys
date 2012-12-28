@@ -9,28 +9,28 @@ If you prefer to list the individual shares that people consume, instead of
 the total, you can prefix the the price with an asterisk.<br/>
 If you paid a $UNIT2.2 icecream for Woody and Buzz Lightyear, and two for Mr. Potato Head,
 you could write:
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 *2.2 ice cream: Woody, Buzz Lightyear, 2 Mr. Potato Head
 </div>
 or (using abbreviations):
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 *2.2 ice cream: woody, buzz, 2 mr. potato
 </div>
 or (using shorthands)
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 w = woody<br/>
 b = buzz<br/>
 p = mr. potato<br/>
 *2.2 ice cream: w, b, 2 p
 </div>
 or (removing optional comma's and spaces):
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 ...<br/>
 *2.2 ice cream: w b 2p
 </div>
 <br/>
 The alternative without individual prices would be:
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 ...<br/>
 8.8 ice cream: w b 2p
 </div>
@@ -39,7 +39,7 @@ The alternative without individual prices would be:
 
 Simply put, everything after a hash symbol (&#35;) is ignored, until the end of the line.
 So if you feel like explaining everything, this is possible:
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 # some Toy Story characters:<br/>
 w = woody&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# you know, the cowboy<br/>
 b = buzz&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# he does't fly, but falls with style<br/>
@@ -54,18 +54,18 @@ p = mr. potato&nbsp;&nbsp;&nbsp;# everything fits in his belly, even two icecrea
 It is possible to define a shorthand for a group of people, using the same syntax
 as is used for items. In the definition of these shorthands, it is allowed to
 refer to other (group) shorthands. So all these bills are identical:
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 IceCreamers = Woody, Buzz, 2 Mr. Potato<br/>
 *2.2 ice creams: IceCreamers
 </div>
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 w = Woody<br/>
 b = Buzz<br/>
 p = Mr. Potato<br/>
 IceCreamers = w b 2p<br/>
 *2.2 ice creams: IceCreamers
 </div>
-<div class='code'>
+<div class='well' style='margin-top: 10px; padding: 10px;'>
 p = mr. potato<br/>
 ToyStory = Woody, Buzz, p<br/>
 *2.2 ice creams: ToyStory, p

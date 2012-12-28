@@ -1265,7 +1265,7 @@ sub show_form_add_pay {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' id='inputAmount' placeholder='0.00' name='ap_value'>\n";
-  print "<span class='add-on'>EUR</span>\n";
+  print "<span class='add-on'>&euro;</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1316,7 +1316,7 @@ sub show_form_add_item {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' name='aw_value' id='inputItemPrice' placeholder='0.00'>\n";
-  print "<span class='add-on'>EUR</span>\n";
+  print "<span class='add-on'>&euro;</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1373,7 +1373,7 @@ sub show_totals {
   need_user_list;
 
   print "<div class='row-fluid'>\n";
-  print "<p>The colors are an indication of your account history: red means mostly negative, green mostly positive</p>\n";
+  print "<div class='alert alert-info'>The colors are an indication of your account history: red means mostly negative, green mostly positive.</div>\n";
   # By ruben: proberen om te laten zien hoe lang je nog op huidig bedrag moet staan om op neutraal te komen
   for (values %USERS) {
     if ($_->{UID} == $auth_uid) {
@@ -1384,7 +1384,7 @@ sub show_totals {
         if ($t+$e!=0 && ($t/($t+$e))>0) {
           my $days=days_to_neutral($t,$e);
           if ($days >= 2) {
-            print "<p class='lead'>Within ".sprintf("%.0f", $days)." days your ".($e<0 ? "red" : "green")." color will become white, if no transactions occur</p>\n";
+            print "<p class='lead'>Within ".sprintf("%.0f", $days)." days your ".($e<0 ? "red" : "green")." color will become white, if no transactions occur.</p>\n";
             print "<!-- TOTAL: $_->{TOTAL} ; EXTRA: $_->{EXTRA} -->";
           } if ($days <= -2) {
             print "<!-- <p class='lead'>You are ".sprintf("%.0f", -$days)." days beyond neutral. ".($t+$e>0 ? "Accept some money from others!" : "Give some money to others!")." </p> --->\n";
@@ -1531,7 +1531,7 @@ sub show_change_settings {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' id='autoaccept' name='cp_autoaccept' value='".htmlwrap($autoaccept)."'>\n";
-  print "<span class='add-on'>EUR</span>\n";
+  print "<span class='add-on'>&euro;</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1837,7 +1837,7 @@ sub output_header {
   print "<!--/.well -->\n";
   print "</div>\n";
   print "<!--/span-->\n";
-  print "<div class='span7'>\n";
+  print "<div class='span10'>\n";
   print "<div class='container-fluid'>\n";
   for my $msg (@msg) {
     print "<div class='alert alert-$msg->[0]'>$msg->[1]</div>\n";
@@ -1852,7 +1852,7 @@ sub output_footer {
   print "<!--/row-->\n";
   print "<hr>\n";
   print "<footer>\n";
-  print "<p class='pull-right text-align-right'>&copy; 2006-2012 by Pieter Wuille & Samuel Van Reeth<br>powered by $VERSION</p>\n";
+  print "<p class='pull-right text-align-right'>&copy; 2006-2012 by Pieter Wuille, Samuel Van Reeth &amp; Pieter Maene<br>Powered by $VERSION</p>\n";
   print " </footer>\n";
   print "</div>\n";
   print "<!--/.fluid-container-->\n";
@@ -2492,7 +2492,7 @@ while(1) {
       print "<div class='controls'>\n";
       print "<div class='input-append'>\n";
       print "<input type='text' id='inputItemPrice' name='ep_value' value='".(-$amount)."'>\n";
-      print "<span class='add-on'>EUR</span>\n";
+      print "<span class='add-on'>&euro;</span>\n";
       print "</div>\n";
       print "</div>\n";
       print "</div>\n";
@@ -2509,7 +2509,7 @@ while(1) {
       print "<div class='controls'>\n";
       print "<div class='input-append'>\n";
       print "<span class='input uneditable-input'>".(-$amount)."</span>\n";
-      print "<span class='add-on'>EUR</span>\n";
+      print "<span class='add-on'>&euro;</span>\n";
       print "</div>\n";
       print "</div>\n";
       print "</div>\n";
@@ -2584,7 +2584,7 @@ while(1) {
     } else {
       print "<span class='input uneditable-input'>$amount</span>\n";
     }
-    print "<span class='add-on'>EUR</span>\n";
+    print "<span class='add-on'>&euro;</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "</div>\n";
@@ -2746,7 +2746,7 @@ while(1) {
       }
     }
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<p/><input type='submit' value='Submit'>\n";
+    print "<div class='control-group'><div class='controls'><input type='submit' class='btn' value='Submit'></div></div>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;
@@ -2939,13 +2939,14 @@ while(1) {
         my @text = <HELPFILE>;
         close HELPFILE;
         output_header;
-        print "<div class='helpnav'>";
+        print "<ul class='breadcrumb'>";
         for (my $i=0; $i<=$#help; $i++) {
-          print " / " if ($i);
+          print "<li>";
+          print "<span class='divider'>/</span>" if ($i);
           print "<a href=\"".genurl(@help[0..$i])."\">".$help[$i]."</a>";
+          print "</li>";
         }
-        print "</div>\n";
-        print "<p/>\n";
+        print "</ul>\n";
         foreach my $text (@text) {
           $text =~ s/\$URL\((.*?)\)/pathurl($1)/eg;
           $text =~ s/\$FULLNAME/htmlwrap(defined $auth_uid ? $auth_fullname : "Your Name")/eg;

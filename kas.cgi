@@ -2725,7 +2725,7 @@ while(1) {
   } elsif ($menu eq 'connections' && defined $auth_username) {
     need_user_list(1);
     output_header;
-    print "<form class='form-horizontal form-horizontal-condensed' action='$URL' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
     print "<fieldset>\n";
     print "<legend>Edit visible people</legend>\n";
     print "<input type='hidden' name='cmd' value='doev'>\n";
@@ -2737,8 +2737,8 @@ while(1) {
     } (values %USERS)) {
       if ($_->{UID}!=$auth_uid && $_->{ACTIVE}) {
         print "<div class='control-group'>\n";
-        print "<label class='control-label'>".$_->{NAME}."</label> \n";
-        print "<div class='controls'>\n";
+        print "<label class='control-label' style='width: 250px;'>".$_->{NAME}."</label> \n";
+        print "<div class='controls' style='padding-left: 90px;'>\n";
         print "<input type='checkbox' name='ev_u$_->{UID}' value='1' ".(defined($_->{VIS}) ? "checked='checked'" : "").">\n";
         print "</div>\n";
         print "</div>\n";

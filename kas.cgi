@@ -2725,7 +2725,7 @@ while(1) {
   } elsif ($menu eq 'connections' && defined $auth_username) {
     need_user_list(1);
     output_header;
-    print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed' action='$URL' method='post'>\n";
     print "<fieldset>\n";
     print "<legend>Edit visible people</legend>\n";
     print "<input type='hidden' name='cmd' value='doev'>\n";

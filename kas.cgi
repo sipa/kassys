@@ -2868,14 +2868,14 @@ while(1) {
     print "<label class='control-label' for='newEmail'>E-mail address</label>\n";
     print "<div class='controls'>\n";
     print "<input type='email' id='newEmail' name='email' placeholder='john.doe&#064;something.net'>\n";
-    print "<span class='help-block'>Must be unique</span>\n";
+    print "<span class='help-inline'>Must be unique</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='newIBAN'>Bank account number</label>\n";
     print "<div class='controls'>\n";
     print "<input type='text' id='newIBAN' name='accnr' placeholder='BE12 3456 7890 1234'>\n";
-    print "<span class='help-block'>Optional</span>\n";
+    print "<span class='help-inline'>Optional</span>\n";
     print "</div>\n";
     print "</div>\n";
     if (!$alreadyht && defined $ENV{REMOTE_USER}) {
@@ -2891,7 +2891,7 @@ while(1) {
         print "<label class='control-label' for='newUsername'>Username</label>\n";
         print "<div class='controls'>\n";
         print "<input type='text' id='newUsername' name='uname' value='".htmlwrap(param('username') || '')."' placeholder='jdoe'>\n";
-        print "<span class='help-block'>Must be unique</span>\n";
+        print "<span class='help-inline'>Must be unique</span>\n";
         print "</div>\n";
         print "</div>\n";
         print "<div class='control-group'>\n";

@@ -2858,7 +2858,6 @@ while(1) {
     print "<form class='form-horizontal form-horizontal-condensed' name='input' action='".selfurl."' method='post'>\n";
     print "<fieldset>\n";
     print "<legend>Create new account</legend>\n";
-    print "<input type='hidden' name='cmd' value='dona' >\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label' for='newFullname'  >Full Name</label>\n";
     print "<div class='controls'>\n";

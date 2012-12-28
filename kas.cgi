@@ -2746,7 +2746,7 @@ while(1) {
       }
     }
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<div class='control-group'><div class='controls'><input type='submit' class='btn' value='Submit'></div></div>\n";
+    print "<div class='control-group'><div class='controls' style='padding-left: 90px;'><input type='submit' class='btn' value='Submit'></div></div>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

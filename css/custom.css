@@ -64,7 +64,7 @@
         margin-left: 230px;
     }
 
-    .form-horizontal-large .controls input:not([type="submit"]),
+    .form-horizontal-large .controls input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
     .form-horizontal-large .controls textarea,
     .form-horizontal-large .controls .input-append,
     .form-horizontal-large .controls span[class="input uneditable-input"] {
@@ -76,6 +76,8 @@
         width: 100%;
         *width: 99.94680851063829%;
     }
+    .form-horizontal-large input[type="radio"],
+    .form-horizontal-large input[type=]
 
     .force-height{
         min-height: 300px;

@@ -33,10 +33,14 @@
         position: fixed;
     }
 
-    .form-horizontal-super-condensed .control-group {
-        margin-bottom: 0px !important;
+    .table-condensed input[type="radio"],
+    .form-horizontal input[type="radio"] {
+        vertical-align: top !important;
     }
 
+    /*
+    form-horizontal-condensed reduces the amount of spacing between the 'rows' of the form
+    */
     .form-horizontal-condensed .control-group {
         margin-bottom: 5px !important;
     }
@@ -46,9 +50,11 @@
         margin-bottom: 5px !important;
     }
 
-    .table-condensed input[type="radio"],
-    .form-horizontal input[type="radio"] {
-        vertical-align: top !important;
+    /*
+    form-horizontal-super-condensed removes all spacing between the 'rows' of the form
+    */
+    .form-horizontal-super-condensed .control-group {
+        margin-bottom: 0px !important;
     }
 
     .form-horizontal-super-condensed input[type="radio"],
@@ -56,14 +62,20 @@
         vertical-align: bottom !important;
     }
 
+    /*
+    form-horizontal-wide gives more space to the labels
+    */
     .form-horizontal-wide .control-label {
-        width: 210px;
+        width: 250px;
     }
 
     .form-horizontal-wide .controls {
-        margin-left: 230px;
+        margin-left: 260px;
     }
 
+    /*
+    form-horizontal-large gives more space for the input fields of the form
+    */
     .form-horizontal-large .controls input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
     .form-horizontal-large .controls textarea,
     .form-horizontal-large .controls .input-append,
@@ -76,9 +88,10 @@
         width: 100%;
         *width: 99.94680851063829%;
     }
-    .form-horizontal-large input[type="radio"],
-    .form-horizontal-large input[type=]
 
+    /*
+    used to force the height of the main screen so there is no overlap between the footer and the sidebar
+    */
     .force-height{
         min-height: 300px;
     }

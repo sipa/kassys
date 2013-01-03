@@ -2544,20 +2544,34 @@ while(1) {
     }
     output_header;
     print "<form class='form-horizontal form-horizontal-condensed' name='doew' action='".selfurl."' method='post'>\n";
-    print "<input type='hidden' name='ew_id' value='$tid'>\n";
     print "<fieldset>\n";
     if ($wanter eq $auth_uid) {
       print "<legend>Edit item</legend>\n";
     } else {
       print "<legend>View item</legend>\n";
     }
-    print "<form name='doew' action='".selfurl."' method='post'>\n";
-    print "<input type='hidden' name='ew_id' value='$tid'>\n";
-    print "<table>\n";
-    print "<tr class='tblodd'><td>When:</td><td>".substr($wwhen,0,16)."</td></tr>\n";
-    print "<tr class='tbleven'><td>Paid by:</td><td> ".htmlwrap($USERS{$wanter}->{NAME})."</td></tr>\n";
-    print "<tr class='tblodd'><td>Paid for:</td><td> <a href='".genurl('group',$wantedg)."'>".htmlwrap($GROUPS{$wantedg}->{DNAME})."</a></td></tr>\n" if (defined $wantedg);
-    print "<tr class='tblodd'><td>Paid for:</td><td> ".htmlwrap($USERS{$wantedu}->{NAME})."</a></td></tr>\n" if (defined $wantedu);
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>When</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input'>".substr($wwhen,0,16)."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Paid by</label>\n";
+    print "<div class='controls'>\n";
+    print "<span class='input uneditable-input'>".htmlwrap($USERS{$wanter}->{NAME})."</span>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Paid for</label>\n";
+    print "<div class='controls'>\n";
+      print "<span class='input uneditable-input'><a href='".genurl('group',$wantedg)."'>".htmlwrap($GROUPS{$wantedg}->{DNAME})."</a></span>\n" if (defined $wantedg);
+      print "<span class='input uneditable-input'>".htmlwrap($USERS{$wantedu}->{NAME})."</span>\n" if (defined $wantedu);
+    print "</div>\n";
+    print "</div>\n";
+    print "<div class='control-group'>\n";
+    print "<label class='control-label'>Name</label>\n";
+    print "<div class='controls'>\n";
     if ($wanter eq $auth_uid) {
       print "<input type='text' name='ew_name' value='".htmlwrap($name)."'>\n";
     } else {
@@ -2598,6 +2612,7 @@ while(1) {
       print "</div>\n";
     }
     print "</fieldset>\n";
+    print "<input type='hidden' name='ew_id' value='$tid'>\n";
     print "</form>\n";
     print "<a href='$URL'>Go back</a>\n";
     $sth->finish;
@@ -2744,14 +2759,14 @@ while(1) {
         $au{$_->{UID}}=1;
       }
     }
-    print "<input type='hidden' name='cmd' value='doev'>\n";
-    print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
     print "<div class='control-group'>\n";
     print "<div class='control-label'>\n";
     print "<input type='submit' value='Submit' class='btn btn-primary'>\n";
     print "</div>\n";
     print "</div>\n";
     print "</fieldset>\n";
+    print "<input type='hidden' name='cmd' value='doev'>\n";
+    print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
     print "</form>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen

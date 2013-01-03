@@ -35,7 +35,7 @@ use Data::Dumper;
 my $SYSTEM="Kassys";
 my $MAJOR=0;
 my $MINOR=10;
-my $REVISION=0;
+my $REVISION=1;
 my $VERSION="$SYSTEM v$MAJOR.$MINOR.$REVISION";
 # REV=$(svn log kas.cgi | egrep '^r[0-9]+ ' | wc -l); sed -re "s/ \\\$REVISION=[0-9]+;/ \$REVISION=$REV;/" -i kas.cgi
 
@@ -2746,7 +2746,13 @@ while(1) {
     }
     print "<input type='hidden' name='cmd' value='doev'>\n";
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<div class='control-group'><div class='controls'><input type='submit' class='btn btn-primary' value='Submit'></div></div>\n";
+    print "<div class='control-group'>\n";
+    print "<div class='control-label'>\n";
+    print "<input type='submit' value='Submit' class='btn btn-primary'>\n";
+    print "</div>\n";
+    print "</div>\n";
+    print "</fieldset>\n";
+    print "</form>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

@@ -65,6 +65,7 @@
     }
 
     .form-horizontal-large .controls input:not([type="submit"]),
+    .form-horizontal-large .controls textarea,
     .form-horizontal-large .controls .input-append,
     .form-horizontal-large .controls span[class="input uneditable-input"] {
         width: 40.42553191489362%;

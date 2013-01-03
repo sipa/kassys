@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href='../css/bootstrap.css' rel='stylesheet'>
+    <link href='../css/bootstrap-responsive.css' rel='stylesheet'>
+    <link href='../css/custom.css' rel='stylesheet'>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kassys v1 Mockup - Payment</title>
+</head>
+<body>
+<div class='navbar navbar-inverse navbar-fixed-top'>
+    <div class='navbar-inner'>
+        <div class='container-fluid'>
+            <a class='brand' href="/kassys1/">Bootstrap<sub>Kas</sub></a>
+            <ul class='nav pull-right'>
+                <li><p class='navbar-text'>Logged in as Samuel Van Reeth (rodikal) </p></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class='container-fluid'>
+    <div class='row-fluid force-height'>
+        <div class='span2'>
+            <div class='well sidebar-nav'>
+                <ul class="nav nav-list">
+                    <li class="nav-header">Menu</li>
+                    <li><a href="overview.html">Overview</a></li>
+                    <li><a href="transaction.html">New transaction</a></li>
+                    <li><a href="connections.html">Connections</a></li>
+                    <li><a href="history.html">Full history</a></li>
+                    <li><a href="settings.html">Settings</a></li>
+                    <li>&nbsp;</li>
+                    <li class="active"><a href="payment.html">Payment</a></li>
+                    <li><a href="group.html">Group</a></li>
+                    <li><a href="item.html">Item</a></li>
+                    <li><a href="bill.html">Bill</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="#">Help</a></li>
+                    <li>&nbsp;</li>
+                    <li><a href="login.html">Log out</a></li>
+                </ul>
+            </div>
+            <!--/.well -->
+        </div>
+        <!--/span-->
+        <div class='span7'>
+            <div class="container-fluid">
+                <form class="form-horizontal form-horizontal-condensed">
+                    <fieldset>
+                        <legend>Edit payment</legend>
+                        <div class="control-group">
+                            <label class="control-label">When</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">2012-12-03 23:51</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">From</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">Zena Vasquez</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">To</label>
+
+                            <div class="controls">
+                                <span class="input uneditable-input">Ferdinand English</span>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <label class="control-label">Amount</label>
+                            <div class="controls">
+                                <div class="input-append">
+                                    <input type="number" id="inputItemPrice" value='5'>
+                                    <span class="add-on">EUR</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <div class="controls">
+                                <input type='submit' class="btn btn-primary" value='Update'>
+                                <input type='submit' class="btn btn-danger" name='ep_delete' value='Delete'/>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+                <a href='overview.html'>Go back</a>
+            </div>
+        </div>
+        <!--/span-->
+    </div>
+    <!--/row-->
+    <hr>
+
+    <footer>
+        <p>&copy; Samuel Van Reeth 2012</p>
+    </footer>
+
+</div>
+<!--/.fluid-container-->
+<script src='../js/jquery.js'></script>
+<script src='../js/bootstrap.js'></script>
+</body>
+</html>

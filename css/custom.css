@@ -1,0 +1,112 @@
+.text-align-left {
+    text-align: left !important;
+}
+
+.text-align-right {
+    text-align: right !important;
+}
+
+.text-align-center {
+    text-align: center !important;
+}
+
+.dropdown-dark {
+    background-color: #1b1b1b;
+}
+
+.dropdown-dark  li > a {
+    color: #999999;
+}
+
+.table-condensed .progress {
+    margin-bottom: 0px !important;
+}
+
+@media (min-width: 768px) {
+    body {
+        padding-top: 60px;
+        padding-bottom: 30px;
+    }
+
+    .sidebar-nav {
+        padding: 9px 0;
+        position: fixed;
+    }
+
+    .table-condensed input[type="radio"],
+    .form-horizontal input[type="radio"] {
+        vertical-align: top !important;
+    }
+
+    /*
+    form-horizontal-condensed reduces the amount of spacing between the 'rows' of the form
+    */
+    .form-horizontal-condensed .control-group {
+        margin-bottom: 5px !important;
+    }
+
+    .form-horizontal-condensed input + .help-block {
+        margin-top: 0 !important;
+        margin-bottom: 5px !important;
+    }
+
+    /*
+    form-horizontal-super-condensed removes all spacing between the 'rows' of the form
+    */
+    .form-horizontal-super-condensed .control-group {
+        margin-bottom: 0px !important;
+    }
+
+    .form-horizontal-super-condensed input[type="radio"],
+    .form-horizontal-super-condensed input[type="checkbox"] {
+        vertical-align: bottom !important;
+    }
+
+    /*
+    form-horizontal-wide gives more space to the labels
+    */
+    .form-horizontal-wide .control-label {
+        width: 250px;
+    }
+
+    .form-horizontal-wide .controls {
+        margin-left: 260px;
+    }
+
+    /*
+    form-horizontal-large gives more space for the input fields of the form
+    */
+    .form-horizontal-large .controls input:not([type="submit"]):not([type="checkbox"]):not([type="radio"]),
+    .form-horizontal-large .controls textarea,
+    .form-horizontal-large .controls .input-append,
+    .form-horizontal-large .controls span[class="input uneditable-input"] {
+        width: 65.95744680851064%;
+        *width: 65.90425531914893%;
+    }
+
+    .form-horizontal-large .controls .input-append input {
+        width: 100%;
+        *width: 99.94680851063829%;
+    }
+
+    /*
+    used to force the height of the main screen so there is no overlap between the footer and the sidebar
+    */
+    .force-height{
+        min-height: 300px;
+    }
+}
+
+.row-fluid .span8 {
+    width: 65.95744680851064%;
+    *width: 65.90425531914893%;
+}
+
+.well-code {
+    margin-top: 10px;
+    padding: 10px;
+}
+
+.table-centered td {
+    vertical-align: middle;
+}

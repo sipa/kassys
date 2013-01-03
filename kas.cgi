@@ -2359,7 +2359,7 @@ while(1) {
     }
     $sth->finish;
     output_header;
-    print "<form name='doeg' action='".selfurl."' method='post' class='form-horizontal form-horizontal-condensed'>\n";
+    print "<form name='doeg' action='".selfurl."' method='post' class='form-horizontal form-horizontal-condensed form-horizontal-large'>\n";
     print "<fieldset>\n";
     print "<legend>Edit group: ".htmlwrap($gte->{NAME})."</legend>\n";
     print "<div class='control-group'>\n";
@@ -2543,7 +2543,7 @@ while(1) {
       next;
     }
     output_header;
-    print "<form class='form-horizontal form-horizontal-condensed' name='doew' action='".selfurl."' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed form-horizontal-large' name='doew' action='".selfurl."' method='post'>\n";
     print "<fieldset>\n";
     if ($wanter eq $auth_uid) {
       print "<legend>Edit item</legend>\n";
@@ -2638,7 +2638,7 @@ while(1) {
       next;
     }
     output_header;
-    print "<form class='form-horizontal form-horizontal-condensed' name='doeb' action='".selfurl."' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-condensed form-horizontal-large' name='doeb' action='".selfurl."' method='post'>\n";
     print "<input type='hidden' name='eb_id' value='$tid'>\n";
     print "<fieldset>\n";
     if ($definer == $auth_uid) {
@@ -2654,44 +2654,44 @@ while(1) {
     print "<div class='control-group'>\n";
     print "<label class='control-label'>When</label>\n";
     print "<div class='controls'>\n";
-    print "<span class='input uneditable-input span8'>".substr($wwhen,0,16)."</span>\n";
+    print "<span class='input uneditable-input'>".substr($wwhen,0,16)."</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Paid by</label>\n";
     print "<div class='controls'>\n";
-    print "<span class='input uneditable-input span8'>".htmlwrap($USERS{$definer}->{NAME})."</span>\n";
+    print "<span class='input uneditable-input'>".htmlwrap($USERS{$definer}->{NAME})."</span>\n";
     print "</div>\n";
     print "</div>\n";
     my ($ndef,$err,$tot,$cont,@eff)=process_bill($definition,$definer==$auth_uid ? 2 : 1);
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Name</label>\n";
     print "<div class='controls'>\n";
-    print "<input type='text' name='eb_name' class='span8' value='".htmlwrap($name)."'>\n";
+    print "<input type='text' name='eb_name' value='".htmlwrap($name)."'>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Description</label>\n";
     print "<div class='controls'>\n";
-    print "<textarea rows='3' cols='60' class='span8' name='eb_descr'>".htmlwrap($descr,1)."</textarea>\n";
+    print "<textarea rows='3' cols='60' name='eb_descr'>".htmlwrap($descr,1)."</textarea>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Total amount</label>\n";
     print "<div class='controls'>\n";
-    print "<span class='input uneditable-input span8'>".sprintf("$UNIT%.2f",$tot)."</span>\n";
+    print "<span class='input uneditable-input'>".sprintf("$UNIT%.2f",$tot)."</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Contributions</label>\n";
     print "<div class='controls'>\n";
-    print "<span class='input uneditable-input span8'>".sprintf("$UNIT%.2f",$cont)."</span>\n";
+    print "<span class='input uneditable-input'>".sprintf("$UNIT%.2f",$cont)."</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
     print "<label class='control-label'>Bill</label>\n";
     print "<div class='controls'>\n";
-    print "<textarea rows='20' cols='60' class='span8' name='eb_def'>".htmlwrap($ndef,1)."</textarea>\n";
+    print "<textarea rows='20' cols='60' name='eb_def'>".htmlwrap($ndef,1)."</textarea>\n";
     print "</div>\n";
     print "</div>\n";
     print "<div class='control-group'>\n";
@@ -2740,7 +2740,7 @@ while(1) {
   } elsif ($menu eq 'connections' && defined $auth_username) {
     need_user_list(1);
     output_header;
-    print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
+    print "<form class='form-horizontal form-horizontal-super-condensed form-horizontal-wide' action='$URL' method='post'>\n";
     print "<fieldset>\n";
     print "<legend>Edit visible people</legend>\n";
     my %au;

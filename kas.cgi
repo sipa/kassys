@@ -1265,7 +1265,7 @@ sub show_form_add_pay {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' id='inputAmount' placeholder='0.00' name='ap_value'>\n";
-  print "<span class='add-on'>&euro;</span>\n";
+  print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1316,7 +1316,7 @@ sub show_form_add_item {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' name='aw_value' id='inputItemPrice' placeholder='0.00'>\n";
-  print "<span class='add-on'>&euro;</span>\n";
+  print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1531,7 +1531,7 @@ sub show_change_settings {
   print "<div class='controls'>\n";
   print "<div class='input-append'>\n";
   print "<input type='text' id='autoaccept' name='cp_autoaccept' value='".htmlwrap($autoaccept)."'>\n";
-  print "<span class='add-on'>&euro;</span>\n";
+  print "<span class='add-on'>EUR</span>\n";
   print "</div>\n";
   print "</div>\n";
   print "</div>\n";
@@ -1811,7 +1811,7 @@ sub output_header {
   print "</div>\n";
   print "</div>\n";
   print "<div class='container-fluid'>\n";
-  print "<div class='row-fluid'>\n";
+  print "<div class='row force-height'>\n";
   print "<div class='span2'>\n";
   print "<div class='well sidebar-nav span2'>\n";
   print "<ul class='nav nav-list'>\n";
@@ -1852,7 +1852,7 @@ sub output_footer {
   print "<!--/row-->\n";
   print "<hr>\n";
   print "<footer>\n";
-  print "<p class='pull-right text-align-right'>&copy; 2006-2012 by Pieter Wuille, Samuel Van Reeth &amp; Pieter Maene<br>Powered by $VERSION</p>\n";
+  print "<p class='pull-right text-align-right'>&copy; 2006-2013 by Pieter Wuille, Samuel Van Reeth &amp; Pieter Maene<br>Powered by $VERSION</p>\n";
   print " </footer>\n";
   print "</div>\n";
   print "<!--/.fluid-container-->\n";
@@ -2492,7 +2492,7 @@ while(1) {
       print "<div class='controls'>\n";
       print "<div class='input-append'>\n";
       print "<input type='text' id='inputItemPrice' name='ep_value' value='".(-$amount)."'>\n";
-      print "<span class='add-on'>&euro;</span>\n";
+      print "<span class='add-on'>EUR</span>\n";
       print "</div>\n";
       print "</div>\n";
       print "</div>\n";
@@ -2509,7 +2509,7 @@ while(1) {
       print "<div class='controls'>\n";
       print "<div class='input-append'>\n";
       print "<span class='input uneditable-input'>".(-$amount)."</span>\n";
-      print "<span class='add-on'>&euro;</span>\n";
+      print "<span class='add-on'>EUR</span>\n";
       print "</div>\n";
       print "</div>\n";
       print "</div>\n";
@@ -2584,7 +2584,7 @@ while(1) {
     } else {
       print "<span class='input uneditable-input'>$amount</span>\n";
     }
-    print "<span class='add-on'>&euro;</span>\n";
+    print "<span class='add-on'>EUR</span>\n";
     print "</div>\n";
     print "</div>\n";
     print "</div>\n";
@@ -2728,7 +2728,6 @@ while(1) {
     print "<form class='form-horizontal form-horizontal-super-condensed' action='$URL' method='post'>\n";
     print "<fieldset>\n";
     print "<legend>Edit visible people</legend>\n";
-    print "<input type='hidden' name='cmd' value='doev'>\n";
     my %au;
     for (sort {
       my $x=(defined($a->{VIS}) ? 0 : 1) <=> (defined($b->{VIS}) ? 0 : 1);
@@ -2737,16 +2736,17 @@ while(1) {
     } (values %USERS)) {
       if ($_->{UID}!=$auth_uid && $_->{ACTIVE}) {
         print "<div class='control-group'>\n";
-        print "<label class='control-label' style='width: 250px;'>".$_->{NAME}."</label> \n";
-        print "<div class='controls' style='padding-left: 90px;'>\n";
+        print "<label class='control-label'>".$_->{NAME}."</label> \n";
+        print "<div class='controls'>\n";
         print "<input type='checkbox' name='ev_u$_->{UID}' value='1' ".(defined($_->{VIS}) ? "checked='checked'" : "").">\n";
         print "</div>\n";
         print "</div>\n";
         $au{$_->{UID}}=1;
       }
     }
+    print "<input type='hidden' name='cmd' value='doev'>\n";
     print "<input type='hidden' name='ev_uids' value='".join(',',sort keys %au)."'>\n";
-    print "<div class='control-group'><div class='controls' style='padding-left: 90px;'><input type='submit' class='btn' value='Submit'></div></div>\n";
+    print "<div class='control-group'><div class='controls'><input type='submit' class='btn btn-primary' value='Submit'></div></div>\n";
     output_footer;
   } elsif ($menu eq 'rss') { # TODO: up-to-date brengen
     need_user_list;

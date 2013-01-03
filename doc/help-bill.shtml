@@ -8,23 +8,23 @@ In what follows, its features will be introduced step-by-step.</p>
 
 To start with a very simple example, imagine you paid a $UNIT1.0 bread for &quot;Mickey Mouse&quot; (a friend of yours).
 In that case you could write:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 1.0 bread: Mickey Mouse
 </div>
 It is possible to assign a single item to more than one person, by using a comma-separated list of
 names. <br/>
 In case you shared the bread with Mickey, and each ate half of it, you can write:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 1.0 bread: Mickey Mouse, $FULLNAME
 </div>
 Now if he also drank a $UNIT1.5 bottle of water (and you paid for it), it becomes somewhat tedious to
 keep writing all names in full:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 1.0 bread: Mickey Mouse, $FULLNAME<br/>
 1.5 water: Mickey Mouse
 </div>
 Therefore, it is possible to define shorthands (single words) that refer to people:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = Mickey Mouse<br/>
 <br/>
@@ -35,7 +35,7 @@ If it happens that someone involved in the transaction contributes some money, y
 write an at-symbol (@) followed by that amount after the name of this person. The difference in money between all items
 and all contributions is assumed to come from yourself.<br/>
 So, if it happened that Mickey did pay $UNIT1.0, you could write:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = Mickey Mouse @1.0<br/>
 <br/>
@@ -45,7 +45,7 @@ m = Mickey Mouse @1.0<br/>
 If some people consumed more than others, you could just list them more than once after the item,
 but you can also write a number in front (called a multiplier). So if you ate 2/3 of the bread, and Mickey only 1/3,
 you could write:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = Mickey Mouse @1.0<br/>
 <br/>
@@ -58,7 +58,7 @@ m = Mickey Mouse @1.0<br/>
 In fact, it is not necessary to type the names of all people involved in the transaction.
 You can abbreviate all names or change their capitalization, as long as they remain unambiguous. If Mickey is the only
 one you know whose name starts with 'Mi', you can just type:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = mi @1.0<br/>
 ...
@@ -76,7 +76,7 @@ There are two simplifications allowed when using shorthands: <ul>
 <li>The space between a multiplier and a shorthand is optional</li>
 </ul>
 Therefore, it is possible to simplify the running example to:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = mick @1.0<br/>
 <br/>
@@ -85,7 +85,7 @@ m = mick @1.0<br/>
 </div>
 Also, the name of an item is optional. If no item name is present,
 the colon after it is also optional. So you could reduce the code to:
-<div class='well' style='margin-top: 10px; padding: 10px;'>
+<div class='well well-code'>
 i = $FULLNAME<br/>
 m = mick @1.0<br/>
 1.0 2i m<br/>

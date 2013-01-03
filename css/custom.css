@@ -27,6 +27,7 @@
         padding-top: 60px;
         padding-bottom: 30px;
     }
+
     .sidebar-nav {
         padding: 9px 0;
         position: fixed;
@@ -65,22 +66,29 @@
 
     .form-horizontal-large .controls input:not([type="submit"]),
     .form-horizontal-large .controls .input-append,
-    .form-horizontal-large .controls span[class="input uneditable-input"]
-    {
+    .form-horizontal-large .controls span[class="input uneditable-input"] {
         width: 40.42553191489362%;
         *width: 40.37234042553192%;
     }
 
-    .form-horizontal-large .controls .input-append input
-    {
+    .form-horizontal-large .controls .input-append input {
         width: 100%;
         *width: 99.94680851063829%;
+    }
+
+    .force-height{
+        min-height: 300px;
     }
 }
 
 .row-fluid .span8 {
     width: 65.95744680851064%;
     *width: 65.90425531914893%;
+}
+
+.well-code {
+    margin-top: 10px;
+    padding: 10px;
 }
 
 .table-centered td {

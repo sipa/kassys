@@ -1588,7 +1588,7 @@ sub days_to_neutral {
 sub output_header {
   my @cookies=();
   if (defined $session) {
-    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{HTTP_HOST}, -path => $DIR, -expires => "+${SESSION_TIME}m");
+    my %cookiedata=(-name => 'session', -value => $session, -domain => $ENV{SERVER_NAME}, -path => $DIR, -expires => "+${SESSION_TIME}m");
     #log_action "COOKIE: ".(join('|',%cookiedata));
     push @cookies,cookie(%cookiedata);
   }
